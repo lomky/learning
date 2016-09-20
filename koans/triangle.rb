@@ -15,6 +15,17 @@
 #
 def triangle(a, b, c)
   # WRITE THIS CODE
+
+  raise TriangleError, "Triangles cannot have a side of zero or less" if [a,b,c].min <= 0
+  x, y, z = [a,b,c].sort
+  raise TriangleError, "Triangles require that any two sides are greater than the third" if x + y <= z
+
+  if a == b && b == c 
+      return :equilateral
+  elsif a == b || b == c || a == c
+    return :isosceles
+  end
+  return :scalene
 end
 
 # Error class used in part 2.  No need to change this code.
