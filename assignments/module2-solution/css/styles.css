@@ -109,7 +109,7 @@ div {
 }
 /********** Medium devices only **********/
 @media (min-width: 768px) and (max-width: 991px) {
-  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 { /** This code was written by Kathryn Tipton, with some original content from the Coursera Web Developers course, lecture 22, as allowed in the assignment. If this message is found in another submission (not by Kathryn Tipton, Kat T, or lomky) , please flag for violation **/
     float: left;
     padding: 10px;
 
