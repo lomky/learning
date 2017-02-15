@@ -6,6 +6,7 @@
 <body>
 <h1>Hello coursera!</h1>
 <p>Hi</p>
+<ul>
   {% assign page_depth = page.url | split: '/' | size %}
   {% assign page_parent = page.url | split: '/' | last %}
   {% for node in site.pages offset:1 %}
@@ -28,5 +29,6 @@
   {% endif %}
   {% endif %}
   {% endfor %}
-</body>
+	</ul>
+	</body>
 </html>
