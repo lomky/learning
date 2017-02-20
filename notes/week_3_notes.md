@@ -445,27 +445,179 @@ Xsmall stacks them nicely, but maybe if they were spaced better and centered?
 Now looks pretty nice, even in the smallest settings. Main page is now complete!
 
 
-
-
-
-
-
-
-
-
-
 ## Coding the Restaurant Menu Pages
+
 
 ### Lecture 37: Coding the Menu Categories
 
+With the front page done, let's review the navigation structure.
+
+Option to click on:
+
+ - menu at the top, or menu tile
+ - takes you to the Categories page, which lists out the menu categories.
+ - one of these is called specials, which is also linked on the front page
+ - this is just a specific menu category.
+
+Coding up the Categories Page.
+
+ - Easy way to start is to copy the index. 
+   - the header and footer are the same, so easier to duplicate
+ - Wipe out the unrelated items.
+   - everything inside the `main-content` `div`.
+
+Ready to start! When you click on menu now you get a valid page, but no content.
+
+  - Tell the user where they are with an `h2`
+    - not `h1`, that's the name of the restaurant!
+    - give the `h2` a class of `text-center` to associate the right css
+    - and an `id` of `menu-categories-title`
+  - create another `div` with `text-center` with a reminder of the price changes for rice substitutions (based on the print menu)
+
+Header is good! Let's add a grid of tiles.
+
+  - let's create a `section`, class `row` for holding the tiles
+  - create a `div` for each grid cell
+  	- `a` with a link to the `single-category.html` that points to the category
+  	- inside that a `dic` of class `category-tile`
+  	- inside that an `img` with the picture `src` for the category, `width` & `height`, and an `alt` text.
+  	- and a `span` with the name of the category
+
+Content is now tehre, but styling isn't there yet.   
+Create the rest of them by copying and pasting that `div` nine or so times (as many as there are categories)  
+Now let's style it! Bootstrap classes:  
+
+  - on the `div`s below the section, set the bootstraps `col-md-2`
+    - no, that doesn't look great.
+  - set it to `col-md-3` instead
+    - much better spacing
+
+Now into the stylesheet
+
+  - give `.category-tile` (the inner `div` inside the `a`)
+    - `position: relative`, a `border`, `overflow: hidden`, `width` and `height` of 200, and a `margin: 0 auto 15px auto`
+  - give `.category-tile span`:
+    - `position: absolute`, position at the bottom right, align it center and give it pretty styling, like the main page spans
+  - give `.category-tile:hover` a `box-shadow`
+  - give a sibling style: `#menu-categories-title + div` a `margin-bottom: 50px` 
+    - separates the titles of the page and the subtitle a slight margin.
+
+Now the first row looks good, but the second is wonky - ah, we missed a `col-md-2` - change to `3`  
+Now it all looks good in medium +, now what do we do with small and xsmall?  
+Let's try `col-sm-4` and see what it looks like. Looking good!  
+Set 'col-xs-6' Looks good! But we can actually get too small still!  
+There is no bootstrap below `xs` in bootstrap, but we can make our own to set the stacking below a specific level.  
+
+Inside the xxsmall `@media` we made before:
+
+  - create a class `.col-xxs-12`
+     - how do we define it? Just go see how Bootstrap defines `col-xs-12`!
+     - mimic what bootstrap does there. Might have multiple styling.
+     - keep everything, even if you don't know exactly why.
+  - and now set `col-xxs-12` on the `div`s
+
+Nice! 4 -> 3 -> 2 -> 1!  
+Now we are good enough for now - eventually we will set up those `div`s inside the section with js!  
+
+
 ### Lecture 38: Coding the Single Menu Category Page
+
+Now we create the page for when you click on a category.   
+Starts with the description, with a note, and then pairs of menu items (picture, name, desc).  
+Looks like each item is actually a sub-grid, maybe 5col for the picture, 7col for the text!
+
+Before we continue - on teh menu page it would be nice to highlight the menu link at the top, showing we are there. give the menu link the class `active`
+
+Let's start again by copying the menu-categories page to get our header, footer, etc. Clear the `main-content` innards.  
+
+ - give the page an `h2` with id `menu-categories-title` class `text-center`
+ - give a subsection with details about the category
+   - `div` class `text-center` with those details
+
+Cool, now the page loads with all the header and footer and a title
+
+let's create our grid.
+
+ - create a `section` with class `row` (remember `main-content` has our `container`)
+
+and the grid: 
+
+  - `div` with class `menu-item-tile col-med-6`
+  - inside, create another `div class="row"`, because we want to subdivide it!
+    - `div class="col-sm-5"` - we want them to be adjacent until under small.
+      - `div class="menu-item-photo"`
+        - `div` of the item text
+          - `img` with the link, side, alt.
+      - `div class="menu-item-price"`
+        - $10.95 `span` pint
+        - $14.95 `span` quart
+          - `div class="menu-item-description col-sm-7"`
+        - `h3 class="menu-item-title"`
+        - `p class="menu-item-details"
+  - `hr class=visible-xs`
+
+Duplicate the tile so we can see how it looks. Content looks right - time to style!
+
+  - give the `.menu-item-tile` a `margin-bottom: 25px`
+  - give the `.menu-item-tile hr` a `width: 80%` - separates the items on the smallest screens
+  - give the `.menu-item-tile .menu-item-price` it's font-size and text-align
+  - give the `.menu-item-tile .menu-item-price span` a smaller font-size
+
+Price line looks pretty good.
+
+  - `.menu-item-photo` gets `position: relative`, a border and overflow: hidden. padding and margin, and a max-width
+  - `.menu-item-photo div` gets `position: absolute`, positioned bottomright, width: 80% a bacgrkound-color and text-align center.
+
+Oh, we moved the price down! add negative margin to the price styling.
+
+  - `.menu-item-descroption` gets some right padding of 30
+  - `h3.menu-item-title` gets a margin of 0 0 10px
+  - `.menu-item-details` gets a smaller font and italics
+
+Looks good in my browser - now test the responsive! Large good, medium good, small good, xsmall messes up!  
+What is happening in the inspector? The photo stacking margins aren't working. Margin right is "-15px" instead of auto. and the text has no styling on it.  
+head into the xsmall `@media` to change it.  
+
+  - `.menu-item-photo` gets `margin-right: auto`
+  - `.menu-item-tile .menu-item-price` gets `text-align: center`
+  - `.menu-item-description` gets `text-align: center`
+
+Looks good in all the spaces!  
+
+But, what do you do when the user content defies your design expectations?  
+Let's add in more items, a half dozen or so.
+
+What happens when the description gets longer? Make the first item twice as long.  
+Oh no, the rows don't move right. The third item got pushed right.  
+How do we do with that?  
+
+  1. Clip the description at a certain length
+    - not really a great plan
+  2. Tell the floats to clear out.
+    - bootstrap has this baked in with a special div
+
+Let's clear it on our large and medium screens.
+
+  - add the bootstrap `div class="clearfix visible-md-block visible-lg-block"` after every second tile
+
+That's it for the site layout! Next up we will be dynamically filling in the real content
 
 ### Lecture 39: Testing the Mobile Version on a Real Phone
 
+Before truly being 'done' with a site, you should test on a real phone.  
+Scroll around, look at the content. Click the links. Click the menu.  
 
+We do seem to be lacking a 'home' button. Would be nice to have on the mobile site.
 
+Would also be nice if the menu collapsed when you click outside it - that's done via Javascript - next lecture!
 
+Let's add the home button to the menu
 
+  - Go to the html, and add a new menu item.
+  - new `li` with class `visible-xs` and `active`
+    - `a` link
+      - `span` of home
+  - add it to the menu categories page as well, but not active
+  - ditto for single-category
 
-
-
+And voila! Now our view on mobile sites look great.
