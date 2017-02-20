@@ -1,0 +1,76 @@
+body {
+  font-size: 16px;
+  color: lightgrey;
+  background-color: darkgreen;
+  font-family: 'Oxygen', sans-serif;
+}
+
+/** HEADER **/
+#header-nav {
+  background-color: black;
+  border-radius: 0;
+  border: 0;
+}
+
+.navbar-brand {
+  padding-top: 25px;
+}
+.navbar-brand h1 { /* Page name */
+  font-family: 'Lora', serif;
+  color: darkgreen;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px #222;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: .75;
+}
+.navbar-brand a:hover, .navbar-brand a:focus {
+  text-decoration: none;
+}
+
+#nav-list {
+  margin-top: 10px;
+}
+#nav-list a {
+  color: darkgreen;
+  background-color: darkgrey;
+  text-align: center;
+  border-bottom: 1px solid darkgreen;
+}
+#nav-list a:hover {
+  background: black;
+}
+
+.navbar-header button.navbar-toggle, .navbar-header .icon-bar {
+  border: 1px solid darkgreen;
+}
+.navbar-header button.navbar-toggle {
+  clear: both;
+  margin-top: -30px;
+}
+/* END HEADER */
+
+/* HOME PAGE */
+#big-tile {
+  width: 100%;
+  margin-bottom: 15px;
+  position: relative;
+  border: 2px solid #3F0C1F;
+  overflow: hidden;
+  background-color: darkgrey;
+}
+#big-tile h3 {
+    color: black;
+}
+#header-tile {
+  margin-top: 50px;
+}
+#chicken-tile {
+}
+
+/* END HOME PAGE */
+
+
+
