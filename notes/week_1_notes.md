@@ -5,9 +5,64 @@
 > Welcome to the course! In this first activity you'll get an opportunity to introduce yourself, and we'll look at the background to functional programming and Erlang. You'll also download and install Erlang to your own machine.
 
 
-### Section 1.1 - Welcome video (01:07)
+### Section 1.1 - Welcome video
 
-### Section 1.2 - Why Erlang? video (06:44)
+Instructor: Simon Thompson, University of Kent, School of Computing  
+Instruction support by Stephen Adams
+
+Week Goal: R/W/X erlang programs.
+
+Erlang programs consist of modules, each containing functions.  
+Run by using the functions in the erlang shell.  
+Iteration vs recursion.  
+
+Other resources:  
+  - Armstrong, J. (2013) Programming Erlang: Software for a concurrent world. (2nd ed.) Pragmatic Programmers.
+  - Cesarini, F. & Thompson, S. (2009) Erlang Programming. Sebastopol, CA: O’Reilly.
+  - Hébert, F. (2013) Learn You Some Erlang for Great Good! San Francisco, CA: No Starch Press.
+    - [Link to free online edition and further resources](http://learnyousomeerlang.com/)
+
+### Section 1.2 - Why Erlang? video
+
+Overview of the history of Erlang (1980s, Sweden).
+
+Goals:  
+  - Complex HW SW combinations
+  - Highly concurrent env, 10K-100K simultaneous calls
+  - OS thread too heavy, needed lightweight
+  - failure tolerant
+    - Hard failure - actual component failures
+    - this led to the "let it fail" philosophy which pervades Erlang.
+  - system must be up all the time
+    - no way to take it down to upgrade
+
+Language of
+  - lightweight processes
+  - ideas of supervision
+    - processes don't deal with their own failure - another seperate component deals with it.
+  - 99.9999% availability
+  - new code can swap in for a currently running piece
+
+Functional was the best way of programming to build upon for these needs.
+
+Since the 1980s
+  - OTP (open telegraph protocol?)
+    - can build a server, a Finite State Machine
+    - can focus on your single goal
+
+Erlang is open source now! Managed by original team still.
+
+Examples in use across industry settings:
+  - online betting
+  - grindr
+  - WhatsApp servers
+
+#### Further Reading
+
+ - [Erlang.org - official Erlang site](erlang.org)
+ - ['Erlang the movie' on YouTube](https://youtu.be/xrIjfIjssLE)
+ - ['Inside Erlang' - creator Joe Armstrong tells his story (Ericsson)](https://www.ericsson.com/news/141204-inside-erlang-creator-joe-armstrong-tells-his-story_244099435_c)
+ - [Erlang Factory / Erlang User Conference](http://www.erlang-factory.com/)
 
 ### Section 1.3 - Erlang and functional programming video (03:39)
 
