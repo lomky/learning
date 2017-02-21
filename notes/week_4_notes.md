@@ -198,9 +198,222 @@ Now in the browser we see:
 
 ### Lecture 42: Javascript Types
 
+#### Types
+
+  - a particular data structure
+  - all languages come with some built in types
+  - these types can be used to build other data structures (types)
+  - JS has 7 built in types; 6 primitive types and 1 Object type
+
+#### Object Type
+
+`Object` is a collection of name/value pairs
+
+e.g.:
+
+    ```
+    firstName: "Kat",
+    lastName: "T",
+    social: {
+      linkedin: "foobar",
+      twitter: "hahNo",
+      facebook: "yup"
+    }
+    ```
+name is a string, but the value can be anything, including another object
+
+#### Primitive Types
+
+Primitive type represents a _single, immutable_ value
+
+  - Single value, i.e. __not__ an object.
+  - Once set, the value cannot be changed.
+     - Read only. Memory space is set.
+
+##### Primitive Type: Boolean
+
+Can only have two valies, `true` or `false`.  
+`true` and `false` are reserved words in JS
+
+##### Primitive Type: Undefined
+
+Undifined disnifies that no value has ever been set.
+
+  - This is hte value set when JS sets up the variable.
+  - Only valid value is `undefined`
+  - You _can_ set a variable to `undefined`, but you _should NEVER do it_
+    - it should mean the item has never been defined, so you are undermining the core meaning.
+
+##### Primitive Type: Null
+
+Null signifies hte lack of value
+
+  - As opposed to `undefined` which is a lack of definition
+  - Can only have one value: `null`
+  - Perfectly okay to explicitly set things to `null`
+
+##### Primitive Type: Number
+
+Number is the only numeric type in JS
+
+  - Always represented under the hoo as double-precision 64-bit floating point
+  - JS does _not_ have an integer type.
+    - integers are a subset of doubles
+
+##### Primitive Type: String
+
+String is a sequence of characters used to represent text.
+
+  - can use either single or double quotes to define it
+    - 'string' and "string" are fine
+
+##### Primitive Type: Symbol
+
+Symbol is new to ES6(ECMA Script 6) - Not covered in this class.
+
+ES6 was released in 2015 and isn't widely supported/used yet.
+
+Goolging for a real answer:
+
+A symbol value may be used as an identifier for object properties; this is the data type's only purpose
+
+Similar to Ruby symbols?
+
+#### Examples of use
+
+Went through examples in the console:
+
+  - after decalring `var x;`, `x == undefined` returns `true`
+  - after assigning a value to `x`, that returns `false` and x has a value
+
+What if we remove the `var x`? We get an error `not defined`.
+
+  - `not defined` is distinct from `undefined`
+  - `not defined` means the variable hasnt even been declared.
+  - `undefined` means the variable has been declared - space has been made in memory for it.
+
 ### Lecture 43: Common Language Constructs
 
+#### String Concat
+
+  - accessed via the `+` operator
+  - can be done via `var1 + var2` or `var1 += var2`
+  - the `+=` stores the value in `var1`, whereas the `+` operator leave the strings alone
+
+
+#### Math Operators
+
+Very straightforward and expected as programming langauges go.
+
+  - normal operators:
+    - `+ - * /` all valid here
+    - `()` change precedence as expected
+  - `NaN` is a special symbol indicating "Not a Number"
+    - occurs when you attempt to do numeric things to non numbers
+
+#### Equality
+
+  - `=` is the assignment operator. No comparison.
+    - `var x = 4, y = 4;` -- valid
+  - `==` is a comparison operator
+    - `if ( x == y )` returns `true` or `false
+    - `if ( "4" == y )` comparing across types?
+      - this does _type conversion_
+      - returns `true`
+  - `===` is _strict_ equality
+    - `4 == 4` is `true`
+    - `"4" == 4` is `false`
+
+
+#### JS `false` and `true`
+
+  - what things are `false` in Javascript?
+    - `false`
+    - `null`
+    - `undefined`
+    - `""`               # empty string
+    - `0`
+    - `NaN`
+  - what things are `true` in Javascript?
+    - `true`
+    - "hello"            # nonempty string
+    - `1`
+    - `-1`
+    - `"false"`          # _string_, not boolean
+  - You can check whether something is `true` or `false` in the console
+    - `Boolean()`
+      - `Boolean(null);` evals to `false`
+      - `Boolean("Hi!");` evals to `true`
+      - this is actually just javascript type converting the value to boolean.
+
+#### Best Practives for `{}`
+
+  - Same line or New line? Is this just a style choice?
+    - may cause religious wars in other languages
+    - but in JS, it _is a best practice_
+  - **Same Line**
+  - the JS engine can accidentally return `undefined` because the `;` at the end is optional
+
+
+#### `for` loop
+
+in js they look like so:
+
+```
+var sum = 0;
+for ( var i = 0; i < 10; i++) {
+  sum = sum + i;
+}
+console.log("sum of 0 thru 9 is: " + sum);
+```
+
+blah blah c-style for loops.
+
 ### Lecture 44: Handling Default Values
+
+```
+function orderChickenWith(sideDish) {
+  console.log("Chicken with " + sideDish);
+}
+
+orderChickenWith("noodles");
+orderChickenWith();
+```
+
+> Chicken with noodles
+> Chicken with undefined
+
+
+```
+function orderChickenWith(sideDish) {
+  if ( sideDish === undefined) {
+    sideDish = "whatever!"
+  }
+  console.log("Chicken with " + sideDish);
+}
+
+orderChickenWith("noodles");
+orderChickenWith();
+```
+
+> Chicken with noodles
+> Chicken with whatever!
+
+
+```
+function orderChickenWith(sideDish) {
+  sideDish = sideDish || "something";
+  console.log("Chicken with " + sideDish);
+}
+
+orderChickenWith("noodles");
+orderChickenWith();
+```
+
+> Chicken with noodles
+> Chicken with something
+
+Standard `||` assignment handling. Lazy.
 
 ## Objects and Functions in Javascript
 
