@@ -51,9 +51,13 @@ And now the log shows both messages, in order
 
 #### Functions
 
-```function a () { ... }```  
+```
+function a () { ... }
+```  
 or  
-```var a = function () { ... }```
+```
+var a = function () { ... }
+```
 
  - Both of these declare a function to be invoked by the name `a`
  - **NB**: in the latter case, it's the _function_ assigned to `a`, not the result of the function execution!
@@ -316,7 +320,7 @@ Very straightforward and expected as programming langauges go.
   - `=` is the assignment operator. No comparison.
     - `var x = 4, y = 4;` -- valid
   - `==` is a comparison operator
-    - `if ( x == y )` returns `true` or `false
+    - `if ( x == y )` returns `true` or `false`
     - `if ( "4" == y )` comparing across types?
       - this does _type conversion_
       - returns `true`
@@ -417,9 +421,143 @@ Standard `||` assignment handling. Lazy.
 
 ## Objects and Functions in Javascript
 
-### Lecture 45: Creating Objects Using 'new Object()' Syntax
+### Lecture 45 Part 1: Creating Objects Using 'new Object()' Syntax
+
+Working with object creation.
+
+
+```
+var company = new Object();
+company.name = "Facebook"; // properties are created when references
+//company.ceo.firstName = "Mark" // but the first level must be created before assigning to sublevels
+company.ceo = new Object();
+company.ceo.firstName = "Mark" // Now this will work!
+company.ceo.favColor - "blue"
+
+console.log(company)
+//Access via dot notation 
+console.log("Comapny CEO name is: " + company.ceo.firstName);
+//Access via bracket notation
+console.log(company["name"]);
+
+//dot notation only works with certain identifiers
+company.$stock = 110; //fine
+// comapny.$stock of company = 110; //no good
+comapny["stock of company"] = 110; //good
+```
+
+This is very wordy. Is there a better syntax?
+
+### Lecture 45 Part 2: Creating Objects Using Object Literal Syntax
+
+Better way: Object Literal
+Simplified syntax for object creation.
+
+```
+var facebook1 = {}; // this works, or you can add values
+var facebook2 = {
+  name: "Facebook",
+  ceo: {
+    firstName: "Mark",
+    favColor: "blue"
+  },
+  "stock of company": 110
+}; 
+
+console.log(facebook);
+```
+
+Much more compact and legible.
+
+Accessing works exactly the same as the first
+
+_be careful with commas and curly braces_
 
 ### Lecture 46: Functions Explained
+
+Functions are First-Class Data
+  - what you can do to variables, you can do to functions
+      - pass it around
+      - assign to var
+      - pass as an arg to a function
+      - return from a function
+  - Functions are objects 
+
+```
+function multiply(x, y) {
+  return x * y;
+}
+```
+
+Should be able to give functions properties
+
+```
+function multiply(x, y) {
+  return x * y;
+}
+multiply.version = "v.1.0.0";
+
+console.log(multiply(5, 3)); // invokes the function
+// prints '15'
+
+conosle.log(multiply); //NOT invoking! no parens
+// prints the code of the function
+
+conosle.log(multiply.version); //acting like an object
+// prints "v.1.0.0"
+```
+
+Let's create a Function Factory
+
+
+```
+//Continuing from above code
+
+// Function factory
+function makeMultiplier(multiplier) {
+  var myFunc = function (x) {
+    return multiplier * x;
+  };
+
+  return myFunc;
+}
+
+var multiplyBy3 = makeMultiplier(3);
+
+console.log(multiplyBy3(10));
+//prints 30
+
+var doubleAll = makeMultiplier(2);
+
+console.log(doubleAll(100));
+//prints 200
+```
+
+Functional programming. Strange to find here in JS
+
+Passing around functions
+
+
+```
+// continuing from above code
+
+// Passing functions as arguments
+function doOperationOn(x, operation) {
+  return operation(x);
+}
+
+var result = doOperationOn(5, multiplyBy3); //Note: No parens
+
+console.log(result);
+//prints 15
+
+result = doOperationOn(100, doubleAll);
+console.log(result);
+//prints 200
+```
+
+Why oh why can no one give good examples of code calling code? These trivial ones just confuse things.
+
 
 ### Lecture 47: Passing Variables by Value vs by Reference
 
@@ -436,4 +574,54 @@ Standard `||` assignment handling. Lazy.
 ### Lecture 52 - Part 1: Fake Namespace
 
 ### Lecture 52 - Part 2: Immediately Invoked Function Expressions (IIFEs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
