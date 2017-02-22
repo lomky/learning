@@ -224,6 +224,7 @@ e.g.:
       facebook: "yup"
     }
     ```
+
 name is a string, but the value can be anything, including another object
 
 #### Primitive Types
@@ -384,8 +385,8 @@ orderChickenWith("noodles");
 orderChickenWith();
 ```
 
-> Chicken with noodles
-> Chicken with undefined
+> Chicken with noodles  
+> Chicken with undefined  
 
 
 ```
@@ -400,8 +401,8 @@ orderChickenWith("noodles");
 orderChickenWith();
 ```
 
-> Chicken with noodles
-> Chicken with whatever!
+> Chicken with noodles  
+> Chicken with whatever!  
 
 
 ```
@@ -414,8 +415,8 @@ orderChickenWith("noodles");
 orderChickenWith();
 ```
 
-> Chicken with noodles
-> Chicken with something
+> Chicken with noodles  
+> Chicken with something  
 
 Standard `||` assignment handling. Lazy.
 
@@ -556,14 +557,279 @@ console.log(result);
 //prints 200
 ```
 
-Why oh why can no one give good examples of code calling code? These trivial ones just confuse things.
-
-
 ### Lecture 47: Passing Variables by Value vs by Reference
+
+#### Passing by Value
+
+Given `b=a`, passing/copying by value means new memory has been alocated for `b`, and future changes to `b` will not affect `a`, nor the reverse.
+
+
+#### Passing by Reference
+
+Given `b=a`, passing/copying by reference means no new memory has been allocated for `b`. Both `b` and `a` point to the same location, and changing one changes the other.
+
+#### In Javascript
+
+In JS, Primitives are passed by value, primitives are passed by reference.
+
+Under the hood, it's all pass-by-value, but it acts like the above.
+
+primatives:  
+```
+var a = 7;
+var b = a;
+```
+
+objects:  
+```
+var a = { x: 7};
+var b = a;
+```
+
+In both cases, `a` and `b` have the same value.  
+
+ - Examples of both here with a representation with memory. Yada yada.
+
+#### Examples
+
+
+primitives, pass by value.
+
+```
+var a = 7;
+var b = a;
+console.log("a: " + a); //7
+console.log("b: " + b); //7
+
+b = 5;
+console.log("after b update:")
+console.log("a: " + a); //7
+console.log("b: " + b); //5
+```
+
+objects, pass by reference
+
+```
+var a = { x: 7 };
+var b = a;
+console.log(a); //Object {x: 7}
+console.log(b); //Object {x: 7}
+
+b.x = 5;
+console.log("after b.x update:);
+console.log(a); //Object {x: 5}
+console.log(b); //Object {x: 5}
+```
+
+#### Examples with Functions
+
+Even when dealig with functions, primitive values are copied.
+
+```
+function changePrimitive(primValue) {
+  console.log("In changePrim...");
+  console.log("before: ");
+  console.log(primValue); // 7
+
+  primValue = 5;
+  console.log("after: ");
+  console.log(primValue); // 5
+}
+
+var value = 7;
+changePrimitive(value);
+console.log("After changePrim, orig value: ");
+console.log(value); //7
+```
+
+But with objects, we pass by reference in function calls.
+
+```
+function changeObject(objValue) {
+  console.log("In changeObj...");
+  console.log("before: ");
+  console.log(objValue); // Object {x: 7}
+
+  objValue = 5;
+  console.log("after: ");
+  console.log(objValue); // Object {x: 5}
+}
+
+var value = { x: 7 };
+changeObject(value);
+console.log("After changeObj, orig value: ");
+console.log(value); // Object {x: 5}
+```
+
+
+
 
 ### Lecture 48: Function Constructors, prototype, and the 'this' Keyword
 
+#### One more way to create objects
+
+```
+function test() {
+  console.log("Hello");
+}
+
+test(); //Hello
+```
+
+So what happens whe you invoke a function? A new execution context is created with a special variable: `this`
+
+```
+function test() {
+  console.log(this);
+  this.myName = "Kat"
+}
+
+test(); // Window {external: Object, ...}
+console.log(window.myName); // Kat
+```
+
+#### Function Constructors
+
+Initial capital is convention for function constructors
+
+```
+function Circle (argument) { 
+  console.log(this); //Circle {}
+  this.radius = radius; //stores the radius INSIDE the object
+}
+
+var myCircle = new Circle(10); //JS makes the `this` point at the newly created obj
+console.log(myCircle); // Circle {radius: 10}
+```
+
+Constructors can't have a return value
+
+```
+function Circle (argument) {
+  this.radius = radius;
+  return {};  //BAD! no returning things from constructors
+}
+
+var myCircle = new Circle(10); 
+console.log(myCircle); // Object {}
+```
+
+Methods in JS are just functions created on objects.
+
+
+```
+function Circle (argument) {
+  this.radius = radius;
+
+  this.getArea =
+    function () {
+      return Math.PI * Math.pow(this.radius, 2);
+    };
+}
+
+var myCircle = new Circle(10); 
+console.log(myCircle.getArea()); //314.159...
+```
+
+You can examine objects in the console.
+
+We don't really want the getArea to have a personal getArea, it would be nice if that were shared.
+
+#### Prototypes
+
+```
+function Circle (argument) {
+  this.radius = radius;
+}
+
+Circle.prototype.getArea =
+  function () {
+    return Math.PI * Math.pow(this.radius, 2);
+  };
+
+var myCircle = new Circle(10); 
+console.log(myCircle.getArea()); //314.159...
+```
+
+Now the function `getArea` lives in a shared space.  
+Don't put the prototype _inside+_ the definition. Wastes processing.  
+Don't forget the `new` keyword!  
+
+
 ### Lecture 49: Object Literals and the 'this' Keyword
+
+how does `this` work inside object literals?
+
+```
+var literalCircle = {
+  radius: 10,
+
+  getArea: function () {
+    console.log(this);
+  }
+};
+
+literalCircle.getArea();
+```
+
+the `this` is referring to our object literal, not the global.
+
+```
+var literalcircle = { //implicit new object()
+  radius: 10,
+
+  getarea: function () {
+    return math.pi * math.pow(this.radius, 2);
+  }
+};
+
+console.log(literalcircle.getarea()); //314.159...
+```
+
+why does this work? Because in object literals the `{}` are _equivalent to_ a `new Object()` call.
+
+#### A "bug" in JS.
+
+```
+var literalcircle = {
+  radius: 10,
+
+  getarea: function () {
+    var increaseRadius = function () {
+      this.radius = 20;
+    };
+    increaseRadius();
+
+    return math.pi * math.pow(this.radius, 2);
+  }
+};
+
+console.log(literalcircle.getarea()); //314.159?!?
+```
+
+Where did the 20 go?  
+Inner functions within a function, the `this` keyword points to the global variable instead of the object this.
+
+How do we handle this? Assign off the `this` at the start of the outer function to `self`
+
+```
+var literalcircle = {
+  radius: 10,
+
+  getarea: function () {
+    var self = this;
+    var increaseRadius = function () {
+      self.radius = 20;
+    };
+    increaseRadius();
+
+    return math.pi * math.pow(this.radius, 2);
+  }
+};
+
+console.log(literalcircle.getarea()); // 1256.637...
+```
+
 
 ## Arrays, Closures, and Namespaces
 
