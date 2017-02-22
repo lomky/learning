@@ -64,11 +64,137 @@ Examples in use across industry settings:
  - ['Inside Erlang' - creator Joe Armstrong tells his story (Ericsson)](https://www.ericsson.com/news/141204-inside-erlang-creator-joe-armstrong-tells-his-story_244099435_c)
  - [Erlang Factory / Erlang User Conference](http://www.erlang-factory.com/)
 
-### Section 1.3 - Erlang and functional programming video (03:39)
+### Section 1.3 - Erlang and functional programming video
 
-### Section 1.4 - Erlang in the functional programming landscape video (05:43)
+#### Erlang is Functional
 
-### Section 1.5 - Using the Erlang system video (05:47)
+Erlang as a functional language, and other functional languages.  
+Presumes knowledge of C, Java, etc  
+
+Erlang is functional means that it works _like a calculator_.  
+3 + 4 + 4 = 11  
+But it's more complicated because instead of just +, -, etc we can have our own defined operations.  
+We also have more complicated data types, like lists.
+
+#### Why functional?
+
+  - Because it's sinmpler. values. No references, pointers, etc
+  - Functional supports high-level patterns, e.g. map/reduce
+  - We don't get side effects
+
+#### Immutability
+
+  - Objects who state doesn't change
+    - if you want a diff object, create one
+  - Objects = Values in functional languages
+  - Thread-safe programming!
+    - safe caching and sharing
+    - consistency
+
+### Section 1.4 - Erlang in the functional programming landscape video
+
+#### Pragmatic
+
+  - At it's core, Erlang is functional  
+    - but it does allow some side effects (e.g. communication)  
+    - but not _others_, no state. no Java-style variables
+  - Erlang has types
+    - but they are ore free-wheeling approach than Java types
+    - but it can use tools to check type correctness
+
+#### Functional Programming Languages
+
+  - Strongly-type, rich type languages
+    - Haskell, Miranda
+      - lazy evaluation 
+      - pure functional!
+        - cannot abide side effects with lazy
+      - allows for infinite complex object structure.
+    - ML, Ocaml, F#
+      - strict evaluation
+      - a little impure
+  - Weakly typed, macros, `eval`
+    - LISP, Scheme, Racket, Common Lisp
+  - "functional" - has a `lambdas` function
+    - Java, Javascript, Ruby, C++, ... (most all)
+    - anonymous functions have proved so useful
+
+### Section 1.5 - Using the Erlang system video
+
+#### Running Erlang
+
+`$ erl` puts you into the erlang shell
+
+Calculations
+
+```
+> 3+4.
+11
+```
+
+Need the `.` to end the input!
+
+```
+> 3
+> +
+> 4
+> .
+11
+```
+
+Comparisons
+
+```
+> 3<4.
+true
+> 3>4.
+false
+```
+
+_Up arrow accesses the history._
+
+Lists
+
+```
+> [2,3,4].
+[2,3,4]
+> hd([2,3,4]).
+2
+```
+
+Variables
+
+```
+> A =[2,3,4].
+[2,3,4]
+> hd(A).
+2
+```
+
+Forget a variable
+
+```
+> f(A).
+ok
+> A.
+* 1: variable 'A' is unbound
+> f(). //Forgets _all bindings_
+```
+
+Functions as expressions
+
+```
+> (fun (X) -> X+X end)(99).
+198
+```
+
+To quit!
+
+```
+> q().
+ok
+```
+
 
 ### Section 1.6 - Installing Erlang article
 
