@@ -198,16 +198,84 @@ ok
 
 ### Section 1.6 - Installing Erlang article
 
+Turns out this is trivially easy on MacOS and on Linux Mint. Yay.
+
+Mac:  
+`brew install erlang`
+
+Linux Mint:  
+`apt install erlang`
+
 ## Programs in Erlang
 
 > In this activity we'll cover the basics of programs in Erlang, and you'll write your first Erlang program. We'll consider types of data in Erlang and the use of variables and patterns.
 
 
-### 1.7 - The basics of Erlang programming video (06:03)
+### 1.7 - The basics of Erlang programming video
 
-### 1.8 - Introducing more complicated functions video (05:43)
+How to write programs in Erlang.
+
+  - directly in the shell
+  - from file
+  - invoking files in the shell
+
+Writing Examples in code. See [Erlang file](../examples/week_1_section_1-7.erl)
+
+Don't name files with `-`
+
+load files into the shell:  
+`c(file_name_less_dot_erl).`
+
+Functions are invoked as fully named:  
+`week_1_section_1_7:double(4)` // 8
+
+Autocompletion works! Yay!
+
+Remember to _export_ the things. If not, you can't invoke them.
+
+
+```
+7> week_1_section_1_7:double(4).
+8
+8> week_1_section_1_7:mult(2,3).
+** exception error: undefined function week_1_section_1_7:mult/2
+```
+
+Add the export:  
+`export([double/1,mult/2]).`  
+This is the name and the _arity_, which says how many args it takes.  
+
+```
+11> week_1_section_1_7:mult(2,3).
+6
+```
+
+### 1.8 - Introducing more complicated functions video
+
+More writing examples. See [Erlang file](../examples/week_1_section_1-8.erl)
+
+multiline functions get `,` on each line. end with `.`
+
+compiling erlang produces a `.beam` file.
 
 ### 1.9 - My first Erlang program article
+
+#### Assignment 1_9
+##### Modifying first.erl
+
+In a text editor of your choice modify first.erl to include functions to square and to treble a value, and test these functions out by calling them from the Erlang shell.
+
+##### Defining second.erl
+Using your text editor of choice, define a new module second.erl to include the following functions:
+
+  - Using the function square from first.erl, define a function that gives the size of the hypotenuse of a right-angled triangle given the lengths of the two other sides.
+  - Define functions that give the perimeter and area of a right-angled triangle, given the lengths of the two short sides.
+  - Which functions can you re-use in making these definitions?
+      - For fun, I made square call mult() and treble call mult twice.
+      - I reused Square in creating hypotenuse.
+      - I reused mult in creating the Right Angle area
+      - I used hypotenuse in the perimeter
+  - Which existing definitions can you modify to give you the answers?
 
 ### 1.10 - Erlang data: numbers and atoms video (05:21)
 

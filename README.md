@@ -11,4 +11,4 @@ Each Weeks Notes can be found here.
 
 ## Assignments
 
-Forthcoming.
+ - [Week 1 Lesson 9](https://github.com/lomky/future-learn-erlang/tree/master/assignments/1_9)
