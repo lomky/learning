@@ -835,6 +835,84 @@ console.log(literalcircle.getarea()); // 1256.637...
 
 ### Lecture 50: Arrays
 
+#### Arrays in JS
+
+Collection of data. But in JS we are dynamic, so arrays have interesting properties.
+
+```
+var array = new Array();
+array[0] = "Kat";
+array[1] = 2;
+array[2] = function (name) {
+  console.log("Hello " + name);
+};
+array[3] = {course: "HTML, CSS & JS};
+```
+
+Can store different types in the array. No problem.
+
+Access the whole array: `array`  
+Access one item: `array[1]`  
+Invoke a function in an array: `array[2](array[0])`
+Invoke an object in an array: `array[3].course`
+
+#### Short Hand Array Creation
+
+```
+var names = [
+  "Kat",
+  "John",
+  "Sue"
+];
+```
+
+#### Array Looping
+
+```
+for (var i = 0; i < names.length; i++) { //.length is an array property
+  console.log("Hello " + names[i]);
+}
+```
+
+#### Sparse
+
+Arrays in JS can be sparse.
+
+```
+names[100] = "Jim"
+```
+
+This is legal, but now if you look you will get Many undefined instances.
+
+
+#### For Loop: IN
+
+objects have a special `prop` value which acts like an array of the keys
+
+```
+var names2 = ["Kat", "Kit", "Sue"];
+
+var myObj = {
+  name: "Kat",
+  course: "HTML/CSS/JS",
+  platform: "Coursera"
+};
+
+for (var prop in myObj) {
+  console.log (prop + ": " myObj[prop]);
+}
+```
+
+Nifty! Can we use this for arrays?
+
+```
+for (var name in names2) {
+  console.log("Hello " + names2[name]);
+}
+```
+
+This works.... but arrays might have _properties_ too. And the `in` loop will loop it too.
+
 ### Lecture 51: Closures
 
 ### Lecture 52 - Part 1: Fake Namespace
