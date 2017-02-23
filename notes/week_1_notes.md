@@ -219,7 +219,7 @@ How to write programs in Erlang.
   - from file
   - invoking files in the shell
 
-Writing Examples in code. See [Erlang file](../examples/week_1_section_1-7.erl)
+Writing Examples in code. See [Erlang file](https://github.com/lomky/future-learn-erlang/blob/master/examples/week_1_section_1_7.erl)
 
 Don't name files with `-`
 
@@ -252,7 +252,7 @@ This is the name and the _arity_, which says how many args it takes.
 
 ### 1.8 - Introducing more complicated functions video
 
-More writing examples. See [Erlang file](../examples/week_1_section_1-8.erl)
+More writing examples. See [Erlang file](https://github.com/lomky/future-learn-erlang/blob/master/examples/week_1_section_1_8.erl)
 
 multiline functions get `,` on each line. end with `.`
 
