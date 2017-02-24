@@ -178,7 +178,7 @@ Forget a variable
 ok
 > A.
 * 1: variable 'A' is unbound
-> f(). //Forgets _all bindings_
+> f(). % Forgets _all bindings_
 ```
 
 Functions as expressions
@@ -227,7 +227,7 @@ load files into the shell:
 `c(file_name_less_dot_erl).`
 
 Functions are invoked as fully named:  
-`week_1_section_1_7:double(4)` // 8
+`week_1_section_1_7:double(4)` %  8
 
 Autocompletion works! Yay!
 
@@ -362,7 +362,7 @@ A list of a number of pieces of data
 Typically, lists are homogenous: all the elements have the same type.  
 A list is like the collection types in Java
 
-###e Tuples _and_ Lists: why?
+#### Tuples _and_ Lists: why?
 
 Both tuples and lists are collections of values, and both _can_ have elements of different types.
 
@@ -399,7 +399,7 @@ Functions can be data themselves.
 
 ```erlang
 30> fun (x) -> x*2 end.
-#Fun<erl_wval.6.80484245>
+Fun<erl_wval.6.80484245>
 ```
 
 For instance, can be arguments of other funcitons
@@ -547,7 +547,7 @@ true
 
 ### 1.23 - Pattern matching revisited video (06:28)
 
-### 1.24 - ### ling it all together assignment -
+### 1.24 - Pulling it all together assignment -
 
 ### 1.25 - Pulling it all together: review review
 
