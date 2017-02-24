@@ -10,10 +10,10 @@
 Instructor: Simon Thompson, University of Kent, School of Computing  
 Instruction support by Stephen Adams
 
-Week Goal: R/W/X erlang programs.
+Week Goal: R/W/X Erlang programs.
 
 Erlang programs consist of modules, each containing functions.  
-Run by using the functions in the erlang shell.  
+Run by using the functions in the Erlang shell.  
 Iteration vs recursion.  
 
 Other resources:  
@@ -123,18 +123,18 @@ We also have more complicated data types, like lists.
 
 #### Running Erlang
 
-`$ erl` puts you into the erlang shell
+`$ erl` puts you into the Erlang shell
 
 Calculations
 
-```
+```erlang
 > 3+4.
 11
 ```
 
 Need the `.` to end the input!
 
-```
+```erlang
 > 3
 > +
 > 4
@@ -144,7 +144,7 @@ Need the `.` to end the input!
 
 Comparisons
 
-```
+```erlang
 > 3<4.
 true
 > 3>4.
@@ -155,7 +155,7 @@ _Up arrow accesses the history._
 
 Lists
 
-```
+```erlang
 > [2,3,4].
 [2,3,4]
 > hd([2,3,4]).
@@ -164,7 +164,7 @@ Lists
 
 Variables
 
-```
+```erlang
 > A =[2,3,4].
 [2,3,4]
 > hd(A).
@@ -173,7 +173,7 @@ Variables
 
 Forget a variable
 
-```
+```erlang
 > f(A).
 ok
 > A.
@@ -183,14 +183,14 @@ ok
 
 Functions as expressions
 
-```
+```erlang
 > (fun (X) -> X+X end)(99).
 198
 ```
 
 To quit!
 
-```
+```erlang
 > q().
 ok
 ```
@@ -234,7 +234,7 @@ Autocompletion works! Yay!
 Remember to _export_ the things. If not, you can't invoke them.
 
 
-```
+```erlang
 7> week_1_section_1_7:double(4).
 8
 8> week_1_section_1_7:mult(2,3).
@@ -245,7 +245,7 @@ Add the export:
 `export([double/1,mult/2]).`  
 This is the name and the _arity_, which says how many args it takes.  
 
-```
+```erlang
 11> week_1_section_1_7:mult(2,3).
 6
 ```
@@ -277,11 +277,247 @@ Using your text editor of choice, define a new module second.erl to include the 
       - I used hypotenuse in the perimeter
   - Which existing definitions can you modify to give you the answers?
 
-### 1.10 - Erlang data: numbers and atoms video (05:21)
+### 1.10 - Erlang data: numbers and atoms video
 
-### 1.11 - Erlang data: tuples, lists and functions video (08:24)
+#### Erlng Data - Types
+
+Numbers
+**Atoms**
+Booleans
+**Tuples & lists**
+Strings
+**Functions**
+
+
+#### Numbers : Integers and Floats
+
+Integers are "bignums": arbitrarily large with full precision
+
+  - you can make huuuge numbers without issue.
+
+Different base are easy: `base#number`: `2#100.` gives `4`
+
+Numbers use all the expected operators: `+ - * / div rem`
+
+`div` is for integrer division
+
+#### Atoms : "it's just a piece of data"
+
+An atom is just an atom... it stands for itself
+
+```erlang
+> foo.
+foo
+> 'I am an atom'.
+'I am an atom'
+```
+
+Atoms can be compared for equality, ordering...
+
+```erlang
+> foo == 'I am an atom'.
+false
+> foo > 'I am an atom'.
+true
+```
+
+Two special atoms, the booleans: `true` and `false`
+
+Atoms can be used in pattern matching.
+
+
+### 1.11 - Erlang data: tuples, lists and functions video
+
+#### Tuples: putting values together
+
+A tuple has a number of pieces of data
+
+```erlang
+{"Joe","Armstrong",55}
+{1.2,1.5}
+{{1.2,1.5},{2.4,5.0}
+```
+
+A common Erlang idion: use the first field to indicate what sort of data in the tuple
+
+```erlang
+{rectable,{1.2,1.5},{2.4,5.0}}
+{circle,{1.1,2.1},3.0}
+```
+
+This is in contrast to other languages that create new objects.
+
+Note that tuples are heterogenous - you can mix types inside it.
+
+#### Lists: collections of values
+
+A list of a number of pieces of data  
+```erlang
+["Joe","Smith"]
+[{1.2,1.5},{2.1,4.2}]
+[]
+[[1,2,3]]
+```
+
+Typically, lists are homogenous: all the elements have the same type.  
+A list is like the collection types in Java
+
+###e Tuples _and_ Lists: why?
+
+Both tuples and lists are collections of values, and both _can_ have elements of different types.
+
+```erlang
+["Joe","armstrong",21]
+{"Joe","armstrong",21}
+```
+
+So why do we need both?  
+
+Because we can do _different things_ with lists and tuples.  
+
+Lists are built up one element at a time, they can be iterated through. Tuples are built in one go.  
+More on this in Week 2.
+
+#### Strings are just lists
+
+A string is just a list of characters
+
+```erlang
+1> "abc".
+"abc"
+2> [97,98,99].
+"abc"
+3> [$a,$b,$c].
+"abc"
+```
+
+The ASCII code for a character, e.g. c, is given by `$c`
+
+#### Functions
+
+Functions can be data themselves.
+
+```erlang
+30> fun (x) -> x*2 end.
+#Fun<erl_wval.6.80484245>
+```
+
+For instance, can be arguments of other funcitons
+
+```erlang
+31> lists:map(fun (X) -> X*2 end, [1,2,3,4]).
+[2,4,6,8]
+32> lists:foldr(fun(X,Y)->X*Y end,1,[1,2,3,4,5,6]).
+720
+```
+
+Very powerful data manipulation: map-reduce (Hadoop) and D3 (JS). More Later.
 
 ### 1.12 - Erlang data in practice article
+
+Here we’ll do some programmed interaction with the Erlang shell.
+
+The aim of this exercise is to familiarise you with some of the details of data in Erlang, through trying out a whole lot of expressions in the Erlang shell.
+
+Try evaluating these expressions: remember to follow each expression with a full stop when you type them into the Erlang shell. As you try this out, see if you can predict what should happen before you do it. Does everything behave as you expect? Share your thoughts in the comments.
+
+```erlang
+% Command : not true.
+% Prediction: false
+1> not true
+false
+
+% Command : true and false.
+% Prediction: false
+2> true and false.
+false
+
+% Command : length([2,3,4,5]).
+% Prediction: 4
+3> length([2,3,4,5]).
+4
+
+% Command : [2,3]++[[4]].
+% Prediction: [2,3,[4]]
+4> [2,3]++[[4]]
+4> .
+[2,3,[4]]
+
+% Command : (fun (X) -> X+2 end)(40).
+% Prediction: 42
+5> (fun (X) -> X+2 end)(40)
+5> .
+42
+
+% Command : fun (X) -> X+2 end(40).
+% Prediction: error? 
+6> fun (X) -> X+2 end(40).
+42
+
+% Command : 2#100.
+% Prediction: 4
+7> 2#100.
+4
+
+% Command : 100#2.
+% Prediction: 0.2
+8> 100#2.
+* 1: illegal base '100'
+
+% Command : 34#2.
+% Prediction: 2
+8> 34#2.
+2
+
+% Command : 2#34.
+% Prediction: Error
+9> 2#34.
+* 1: illegal integer
+
+% Command : [97,98,99].
+% Prediction: "abc"
+9> [97,98,99].
+"abc"
+
+% Command : [$h,$e,$l,$l,$o].
+% Prediction: "hello"
+10> [$h,$e,$l,$l,$o]
+10> .
+"hello"
+
+% Command : [$h,$e,$l,$l,o].
+% Prediction: "hello"
+11> [$h,$e,$l,$l,o].
+[104,101,108,108,o]
+
+% Command : [34,3,5,36,37].
+% Prediction: [34,3,5,36,37]
+12> [34,3,5,36,37].
+[34,3,5,36,37]
+
+% Command : [34,35,36,37].
+% Prediction: [34,35,36,37]
+13> [34,35,36,37].
+"\"#$%"
+
+% Command : false and (3 == (4 div 0)).
+% Prediction: false
+14> false and (3 == (4 div 0)).
+** exception error: an error occurred when evaluating an arithmetic expression
+     in operator  div/2
+        called as 4 div 0
+
+% Command : false andalso (3 == (4 div 0)).
+% Prediction: error?
+16> false andalso (3 == (4 div 0)).
+false
+
+% Command : true orelse (3 == (4 div 0)). 
+% Prediction: true
+17> true orelse (3 == (4 div 0)).
+true
+
+```
 
 ### 1.13 - Variables in Erlang video (07:51)
 
