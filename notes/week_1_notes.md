@@ -335,7 +335,7 @@ A tuple has a number of pieces of data
 ```erlang
 {"Joe","Armstrong",55}
 {1.2,1.5}
-{{1.2,1.5},{2.4,5.0}
+{{1.2,1.5},{2.4,5.0}}
 ```
 
 A common Erlang idion: use the first field to indicate what sort of data in the tuple
