@@ -915,9 +915,245 @@ This works.... but arrays might have _properties_ too. And the `in` loop will lo
 
 ### Lecture 51: Closures
 
+#### Closures in JS
+
+These enable AngularJS. We have actually already seen closures.
+
+```
+function makeMultiplier (multiplier) {
+  return (
+    function (x) {
+      return multiplier * x;
+    }
+  );
+}
+
+var doubleAll = makeMultiplier(2);
+console.log(doubleAll(10)); //20
+```
+
+How does this work, exactly?
+
+First call to makeMultiplier declares the local copy of `multiplier`
+
+So what happens if we log out its value?
+
+```
+function makeMultiplier (multiplier) {
+  function b() {
+    console.log("Multiplier is: " + multiplier);
+  }
+  b(); //Multiplier is 2 //WHAT?!
+
+  return (
+    function (x) {
+      return multiplier * x;
+    }
+  );
+}
+
+var doubleAll = makeMultiplier(2);
+console.log(doubleAll(10)); //20
+```
+
+How does the function know multiplier is 2?
+
+The variable evaluation checks the local lexicon value (inside `b`), then it goes to the outside lexical environment (makeMultiplier function). This is where it gets the value from.
+
+But our return value doesn't create the execution env, as it's not invoking the function. It doesn't get an execution env until invoked by the last console.log. So how did it know about the value?!
+
+Javascript Closures are how this works. JS preserves the outer env memory space instead of throwing it away.
+
+This is vaguely confusing at the high level. I guess it's just that when otherwise a execution env would be done, JS instead saves it if we have a to-be-invoked function?
+
+
 ### Lecture 52 - Part 1: Fake Namespace
 
+
+#### Common problem in JS
+
+Loading three scripts, one after another.  
+Can be your own or third party.  
+
+
+```
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script src="js/script1.js"></script>
+    <script src="js/script2.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+<body>
+  <h1>Lecture 52</h1>
+</body>
+</html>
+```
+
+`scripts1.js`
+
+```
+var name = "Yaakov";
+function sayHello () {
+  console.log("Hello " + name);
+}
+```
+
+`script2.js`
+
+```
+var name = "John"
+function sayHi () {
+  console.log("Hi " + name);
+}
+```
+
+`app.js`  
+
+```
+sayHello();
+sayHi();
+```
+
+So what does teh console print?
+
+> Hello John  
+> Hi John  
+
+Why didn't it say "Hello Yaakov"?
+
+the variable `name` is overridden!
+
+We solve this by introducing Namespaces!  
+But, JS doesn't have formal namespaces. We have to fake them.
+
+#### Namespaces in JS - Acceptable
+
+in your scripts, create a variable object named for your script, and store any variables and functions inside that object
+
+Fake Namespaces:
+
+`scripts1.js`
+
+```
+var yaakovGreeter = {};
+yaakovGreeter. name = "Yaakov";
+yaakovGreeter.sayHello = function () {
+  console.log("Hello " + johnGreeter.name);
+}
+```
+
+`script2.js`
+
+```
+var johnGreeter = {};
+johnGreeter.name = "John"
+johnGreeter.sayHi = function () {
+  console.log("Hi " + johnGreeter.name);
+}
+```
+
+`app.js`  
+
+```
+yaakovGreeter.sayHello();
+johnGreeter.sayHi();
+```
+
+Now we get:  
+
+> Hello Yaakov  
+> Hi John  
+
 ### Lecture 52 - Part 2: Immediately Invoked Function Expressions (IIFEs)
+
+#### Best practice for seperating private variables
+
+Rather than faking namespaces with js objects, we can use Immediately Invoked Function Expressions.
+
+We may not want these variables to hang around
+
+
+You can create a function object, and then immediately invoke it by adding (args) at the end
+
+Final Forms:
+
+`scripts1.js`
+
+```
+(function (window) {
+  var yaakovGreeter = {};
+  yaakovGreeter.name = "Yaakov";
+  var greeting = "Hello ";
+  yaakovGreeter.sayHello = function () {
+    console.log(greeting + yaakovGreeter.name);
+  }
+
+  window.yaakovGreeter = yaakovGreeter;
+
+})(window);
+```
+
+`script2.js`
+
+```
+(function (window) {
+  var johnGreeter = {};
+  johnGreeter.name = "John";
+  var greeting = "Hi ";
+  johnGreeter.sayHi = function () {
+    console.log(greeting + johnGreeter.name);
+  }
+
+  window.johnGreeter = johnGreeter;
+
+})(window);
+```
+
+`app.js`  
+
+```
+yaakovGreeter.sayHello();
+johnGreeter.sayHi();
+
+// Immediately Invoked Function Expression
+// IIFE
+(function (name) {
+  console.log("Hello " + name);
+})("Coursera!");
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
