@@ -51,11 +51,11 @@ And now the log shows both messages, in order
 
 #### Functions
 
-```
+```javascript
 function a () { ... }
 ```  
 or  
-```
+```javascript
 var a = function () { ... }
 ```
 
@@ -70,7 +70,7 @@ Calling a function:
 
 Arguments are defined in the definition:
 
-```
+```javascript
 function compare (x, y) {
   return x > y;
 }
@@ -99,7 +99,7 @@ JS has two scopes:
   - Everything in JS is executed in an _Execution Context_
   - Function invocation creates a new _Execution Context_
   - Each _Execution Context_ has:
-    - its own _Variable Environment
+    - its own _Variable Environment_
     - special '`this`' object
     - Reference to its _Outer Environment_
   - Global scope lacks an _Outer Environment_, as it is the outmost.
@@ -113,7 +113,7 @@ The Scope Chain Process:
   - If not found, the Global scope will be searched
   - If not found, the variable is `undefined`.
 
-So, scoping is nested like russian dolls. Onions. Ogres.  
+So, scoping is nested like Russian dolls. Onions. Ogres.  
 ```
     ______________________________________
     | _Global_    ____________________   |
@@ -145,13 +145,14 @@ In the browser console, type `this`, and then `window`
 You get the same set of key value pairs.
 
   - define: 
-    ```
-    var a = function () {
-        var message = "inside a";
-        console.log("a: message = " + message);
-    }
-    a();
-    ```
+
+```javascript
+var a = function () {
+    var message = "inside a";
+    console.log("a: message = " + message);
+}
+a();
+```
 
 Now in the browser we see:
 "global: message = in global"
@@ -160,17 +161,18 @@ Now in the browser we see:
 And if we call B inside A?
 
   - update the code: 
-    ```
-    var a = function () {
-        var message = "inside a";
-        console.log("a: message = " + message);
-        b();
-    }
-    function b() {
-        console.log("b: message = " + message);
-    }
-    a();
-    ```
+
+```javascript
+var a = function () {
+    var message = "inside a";
+    console.log("a: message = " + message);
+    b();
+}
+function b() {
+    console.log("b: message = " + message);
+}
+a();
+```
 
 Now in the browser we see:
 "global: message = in global"
@@ -179,23 +181,24 @@ Now in the browser we see:
 
 And what if we define B inside A?
 
-  - update the code:
-    ```
-    var a = function () {
-        var message = "inside a";
-        console.log("a: message = " + message);
-        function b() {
-            console.log("b: message = " + message);
-        }
-        b();
-    }
-    a();
-    ```
+  - update the code:  
 
-Now in the browser we see:
-"global: message = in global"
-"a: message = inside a"
-"b: message = inside a"
+```javascript
+var a = function () {
+    var message = "inside a";
+    console.log("a: message = " + message);
+    function b() {
+        console.log("b: message = " + message);
+    }
+    b();
+}
+a();
+```
+
+Now in the browser we see:  
+"global: message = in global"  
+"a: message = inside a"  
+"b: message = inside a"  
 
 
 ## Javascript Types and Common Language Constructs
@@ -215,15 +218,15 @@ Now in the browser we see:
 
 e.g.:
 
-    ```
-    firstName: "Kat",
-    lastName: "T",
-    social: {
-      linkedin: "foobar",
-      twitter: "hahNo",
-      facebook: "yup"
-    }
-    ```
+```javascript
+firstName: "Kat",
+lastName: "T",
+social: {
+  linkedin: "foobar",
+  twitter: "hahNo",
+  facebook: "yup"
+}
+```
 
 name is a string, but the value can be anything, including another object
 
@@ -231,27 +234,27 @@ name is a string, but the value can be anything, including another object
 
 Primitive type represents a _single, immutable_ value
 
-  - Single value, i.e. __not__ an object.
+  - Single value, i.e. **not** an object.
   - Once set, the value cannot be changed.
      - Read only. Memory space is set.
 
 ##### Primitive Type: Boolean
 
-Can only have two valies, `true` or `false`.  
+Can only have two values, `true` or `false`.  
 `true` and `false` are reserved words in JS
 
 ##### Primitive Type: Undefined
 
-Undifined disnifies that no value has ever been set.
+Undefined signifies that no value has ever been set.
 
-  - This is hte value set when JS sets up the variable.
+  - This is the value set when JS sets up the variable.
   - Only valid value is `undefined`
   - You _can_ set a variable to `undefined`, but you _should NEVER do it_
     - it should mean the item has never been defined, so you are undermining the core meaning.
 
 ##### Primitive Type: Null
 
-Null signifies hte lack of value
+Null signifies the lack of value
 
   - As opposed to `undefined` which is a lack of definition
   - Can only have one value: `null`
@@ -261,7 +264,7 @@ Null signifies hte lack of value
 
 Number is the only numeric type in JS
 
-  - Always represented under the hoo as double-precision 64-bit floating point
+  - Always represented under the hood as double-precision 64-bit floating point
   - JS does _not_ have an integer type.
     - integers are a subset of doubles
 
@@ -364,7 +367,7 @@ Very straightforward and expected as programming langauges go.
 
 in js they look like so:
 
-```
+```javascript
 var sum = 0;
 for ( var i = 0; i < 10; i++) {
   sum = sum + i;
@@ -376,7 +379,7 @@ blah blah c-style for loops.
 
 ### Lecture 44: Handling Default Values
 
-```
+```javascript
 function orderChickenWith(sideDish) {
   console.log("Chicken with " + sideDish);
 }
@@ -389,7 +392,7 @@ orderChickenWith();
 > Chicken with undefined  
 
 
-```
+```javascript
 function orderChickenWith(sideDish) {
   if ( sideDish === undefined) {
     sideDish = "whatever!"
@@ -405,7 +408,7 @@ orderChickenWith();
 > Chicken with whatever!  
 
 
-```
+```javascript
 function orderChickenWith(sideDish) {
   sideDish = sideDish || "something";
   console.log("Chicken with " + sideDish);
@@ -427,7 +430,7 @@ Standard `||` assignment handling. Lazy.
 Working with object creation.
 
 
-```
+```javascript
 var company = new Object();
 company.name = "Facebook"; // properties are created when references
 //company.ceo.firstName = "Mark" // but the first level must be created before assigning to sublevels
@@ -454,7 +457,7 @@ This is very wordy. Is there a better syntax?
 Better way: Object Literal
 Simplified syntax for object creation.
 
-```
+```javascript
 var facebook1 = {}; // this works, or you can add values
 var facebook2 = {
   name: "Facebook",
@@ -484,7 +487,7 @@ Functions are First-Class Data
       - return from a function
   - Functions are objects 
 
-```
+```javascript
 function multiply(x, y) {
   return x * y;
 }
@@ -492,7 +495,7 @@ function multiply(x, y) {
 
 Should be able to give functions properties
 
-```
+```javascript
 function multiply(x, y) {
   return x * y;
 }
@@ -511,7 +514,7 @@ conosle.log(multiply.version); //acting like an object
 Let's create a Function Factory
 
 
-```
+```javascript
 //Continuing from above code
 
 // Function factory
@@ -539,7 +542,7 @@ Functional programming. Strange to find here in JS
 Passing around functions
 
 
-```
+```javascript
 // continuing from above code
 
 // Passing functions as arguments
@@ -575,13 +578,14 @@ In JS, Primitives are passed by value, primitives are passed by reference.
 Under the hood, it's all pass-by-value, but it acts like the above.
 
 primatives:  
-```
+
+```javascript
 var a = 7;
 var b = a;
 ```
 
 objects:  
-```
+```javascript
 var a = { x: 7};
 var b = a;
 ```
@@ -595,7 +599,7 @@ In both cases, `a` and `b` have the same value.
 
 primitives, pass by value.
 
-```
+```javascript
 var a = 7;
 var b = a;
 console.log("a: " + a); //7
@@ -609,7 +613,7 @@ console.log("b: " + b); //5
 
 objects, pass by reference
 
-```
+```javascript
 var a = { x: 7 };
 var b = a;
 console.log(a); //Object {x: 7}
@@ -625,7 +629,7 @@ console.log(b); //Object {x: 5}
 
 Even when dealig with functions, primitive values are copied.
 
-```
+```javascript
 function changePrimitive(primValue) {
   console.log("In changePrim...");
   console.log("before: ");
@@ -644,7 +648,7 @@ console.log(value); //7
 
 But with objects, we pass by reference in function calls.
 
-```
+```javascript
 function changeObject(objValue) {
   console.log("In changeObj...");
   console.log("before: ");
@@ -668,7 +672,7 @@ console.log(value); // Object {x: 5}
 
 #### One more way to create objects
 
-```
+```javascript
 function test() {
   console.log("Hello");
 }
@@ -678,7 +682,7 @@ test(); //Hello
 
 So what happens whe you invoke a function? A new execution context is created with a special variable: `this`
 
-```
+```javascript
 function test() {
   console.log(this);
   this.myName = "Kat"
@@ -692,7 +696,7 @@ console.log(window.myName); // Kat
 
 Initial capital is convention for function constructors
 
-```
+```javascript
 function Circle (argument) { 
   console.log(this); //Circle {}
   this.radius = radius; //stores the radius INSIDE the object
@@ -704,7 +708,7 @@ console.log(myCircle); // Circle {radius: 10}
 
 Constructors can't have a return value
 
-```
+```javascript
 function Circle (argument) {
   this.radius = radius;
   return {};  //BAD! no returning things from constructors
@@ -717,7 +721,7 @@ console.log(myCircle); // Object {}
 Methods in JS are just functions created on objects.
 
 
-```
+```javascript
 function Circle (argument) {
   this.radius = radius;
 
@@ -737,7 +741,7 @@ We don't really want the getArea to have a personal getArea, it would be nice if
 
 #### Prototypes
 
-```
+```javascript
 function Circle (argument) {
   this.radius = radius;
 }
@@ -760,7 +764,7 @@ Don't forget the `new` keyword!
 
 how does `this` work inside object literals?
 
-```
+```javascript
 var literalCircle = {
   radius: 10,
 
@@ -774,7 +778,7 @@ literalCircle.getArea();
 
 the `this` is referring to our object literal, not the global.
 
-```
+```javascript
 var literalcircle = { //implicit new object()
   radius: 10,
 
@@ -790,7 +794,7 @@ why does this work? Because in object literals the `{}` are _equivalent to_ a `n
 
 #### A "bug" in JS.
 
-```
+```javascript
 var literalcircle = {
   radius: 10,
 
@@ -812,7 +816,7 @@ Inner functions within a function, the `this` keyword points to the global varia
 
 How do we handle this? Assign off the `this` at the start of the outer function to `self`
 
-```
+```javascript
 var literalcircle = {
   radius: 10,
 
@@ -839,7 +843,7 @@ console.log(literalcircle.getarea()); // 1256.637...
 
 Collection of data. But in JS we are dynamic, so arrays have interesting properties.
 
-```
+```javascript
 var array = new Array();
 array[0] = "Kat";
 array[1] = 2;
@@ -858,7 +862,7 @@ Invoke an object in an array: `array[3].course`
 
 #### Short Hand Array Creation
 
-```
+```javascript
 var names = [
   "Kat",
   "John",
@@ -868,7 +872,7 @@ var names = [
 
 #### Array Looping
 
-```
+```javascript
 for (var i = 0; i < names.length; i++) { //.length is an array property
   console.log("Hello " + names[i]);
 }
@@ -878,7 +882,7 @@ for (var i = 0; i < names.length; i++) { //.length is an array property
 
 Arrays in JS can be sparse.
 
-```
+```javascript
 names[100] = "Jim"
 ```
 
@@ -889,7 +893,7 @@ This is legal, but now if you look you will get Many undefined instances.
 
 objects have a special `prop` value which acts like an array of the keys
 
-```
+```javascript
 var names2 = ["Kat", "Kit", "Sue"];
 
 var myObj = {
@@ -905,7 +909,7 @@ for (var prop in myObj) {
 
 Nifty! Can we use this for arrays?
 
-```
+```javascript
 for (var name in names2) {
   console.log("Hello " + names2[name]);
 }
@@ -919,7 +923,7 @@ This works.... but arrays might have _properties_ too. And the `in` loop will lo
 
 These enable AngularJS. We have actually already seen closures.
 
-```
+```javascript
 function makeMultiplier (multiplier) {
   return (
     function (x) {
@@ -938,7 +942,7 @@ First call to makeMultiplier declares the local copy of `multiplier`
 
 So what happens if we log out its value?
 
-```
+```javascript
 function makeMultiplier (multiplier) {
   function b() {
     console.log("Multiplier is: " + multiplier);
@@ -976,7 +980,7 @@ Loading three scripts, one after another.
 Can be your own or third party.  
 
 
-```
+```html
 <!doctype html>
 <html lang="en">
   <head>
@@ -993,7 +997,7 @@ Can be your own or third party.
 
 `scripts1.js`
 
-```
+```javascript
 var name = "Yaakov";
 function sayHello () {
   console.log("Hello " + name);
@@ -1002,7 +1006,7 @@ function sayHello () {
 
 `script2.js`
 
-```
+```javascript
 var name = "John"
 function sayHi () {
   console.log("Hi " + name);
@@ -1011,7 +1015,7 @@ function sayHi () {
 
 `app.js`  
 
-```
+```javascript
 sayHello();
 sayHi();
 ```
@@ -1036,7 +1040,7 @@ Fake Namespaces:
 
 `scripts1.js`
 
-```
+```javascript
 var yaakovGreeter = {};
 yaakovGreeter. name = "Yaakov";
 yaakovGreeter.sayHello = function () {
@@ -1046,7 +1050,7 @@ yaakovGreeter.sayHello = function () {
 
 `script2.js`
 
-```
+```javascript
 var johnGreeter = {};
 johnGreeter.name = "John"
 johnGreeter.sayHi = function () {
@@ -1056,7 +1060,7 @@ johnGreeter.sayHi = function () {
 
 `app.js`  
 
-```
+```javascript
 yaakovGreeter.sayHello();
 johnGreeter.sayHi();
 ```
@@ -1081,7 +1085,7 @@ Final Forms:
 
 `scripts1.js`
 
-```
+```javascript
 (function (window) {
   var yaakovGreeter = {};
   yaakovGreeter.name = "Yaakov";
@@ -1097,7 +1101,7 @@ Final Forms:
 
 `script2.js`
 
-```
+```javascript
 (function (window) {
   var johnGreeter = {};
   johnGreeter.name = "John";
@@ -1113,7 +1117,7 @@ Final Forms:
 
 `app.js`  
 
-```
+```javascript
 yaakovGreeter.sayHello();
 johnGreeter.sayHi();
 
