@@ -519,11 +519,195 @@ true
 
 ```
 
-### 1.13 - Variables in Erlang video (07:51)
+### 1.13 - Variables in Erlang video
 
-### 1.14 - Pattern matching video (06:22)
+#### Erlang so far
+
+It works like a calculator. Computation is expression evaluation.  
+Values come from these built in types: numbers, aroms, lists, tuples, and functions.
+
+#### Erlang has Variables!
+
+```erlang
+1> A=2+3.
+5
+2> B=A-1.
+4
+```
+
+But not like other variables!
+
+```erlang
+3> A=B+1.
+5
+4> A=B.
+** exception error: no match of right hand side value 4
+```
+
+What's happening?
+
+#### Erlanf has _single assignment_ variables
+
+If a variable doesn't have a value already - it isn't _bound_ - then `=` gives it a value:  
+
+```erlang
+1> A=2+3.
+5
+2> B=A-1.
+4
+```
+
+If it _is_ bound, then '=' is a _check on its value_, does the value on the right-hand side (RHS) match the value on the LHS?
+
+```erlang
+3> A=B+1.
+5
+4> A=B.
+** exception error: no match of right hand side value 4
+```
+#### So how are variables used in Erlang?
+
+  - We can use them to name values
+    - `A=2+3.` `B=A-1.`
+  - And use those variables in defining other values
+    - `C=(A,B,A).`
+    - Variables in Erlang are _names_. _Definitions_.
+  - We can put _patterns_ on the LHS of an assignment and then use those variables in patterns.
+    - `{A,B}={2,3}.` defines `B` distinctly
+    - `{A,C}={2,5}.`
+    - `{A,D}={6,6}.` Fails, as `A` already has a value! `D` gets no value.
+  - We can put _repeatd variables_ in patterns
+    - `{A,A}={2,2}.`
+    - `{B,B}={2,5}.` Fails, `B` can't take two values.
+
+### 1.14 - Pattern matching video
+
+#### No updatable variab;es
+
+In Java one might write:
+
+```java
+for (int i = 1; i <= 200; i++)
+{
+    if (i%2 == 0)
+    {
+      sum = sum + i;
+    }
+}
+```
+
+But that will not work in Erlang. In particular the statement `sum = sum + i` is nonsense.
+
+But we can recreate this effect in a different way. Next Week.
+
+#### Defining Functions for ourselves
+
+The simplest function definitions look like:
+
+```erlang
+double(X) ->
+  times(X,2).
+
+times(X,Y) ->
+  X*Y.
+```
+
+#### Pattern Matching & Multiple funcion clauses
+
+Suppose we want to make a choice in defining a function
+
+Instead of writing (just) a variables as an argment, we can write a literal, or even more complicated things.
+
+```erlang
+is_zero(0) ->
+  true;  % Clause 1 ends with ;
+is_zero(X) ->
+  false. % Last Clause ends with .
+```
+
+Functions can have multiple clauses, separated by semi-colons.  
+They are matched sequentially, use the _first_ that succeeds.
+
+#### Boolean Or
+
+Boolean or usually allows both possibilities to be `true`.  
+In a cafe, you can have pizza or pasta, but not both.  
+`XOR`!  
+
+Defined like so:
+
+```erlang
+xOr(true,false) ->
+  true;
+xOr(false,true) ->
+  true;
+xOr(X,Y) ->
+  false.
+```
+
+#### A common idiom: "don't care"
+
+In the final "catch all" case there, `X` and `Y` aren't used in the definition.  
+We don't care about their values, and we can replace them with `_`
+
+```erlang
+xOr(true,false) ->
+  true;
+xOr(false,true) ->
+  true;
+xOr(_,_) ->
+  false.
+```
+
+#### Checking for equality
+
+You can also use pattern matching to check equality between parts of patterns.  
+In this case, between two arguments, we check if the args are the same (true or false), then they are false, otherwise true.
+
+```erlang
+xOr(X,X) ->
+  false;
+xOr(_,_) ->
+  true.
+```
+
 
 ### 1.15 - Variables and patterns in practice article
+
+#### Assignment 1.15
+
+The aim of this exercise is to give you experience of writing functions using pattern matching in Erlang, as well as to do some “hand calculation” too.
+
+You can solve all of these questions just using pattern matching – in particular you don’t need any other mechanism for distinguishing between different cases.
+
+We’ll provide some feedback for these exercises in the next step, but when you have completed the step, maybe you would like to discuss your approach, and compare it with what other learners have done, in the comments for this step?
+
+##### Exclusive or
+
+In the previous video step on pattern matching we saw two ways of defining “exclusive or”. Give at least three others. You might find it useful to know that:
+
+  - `=/=` and `==` are the operations for inequality and equality in Erlang;
+  - `not` is the Erlang negation function; and,
+  - `and` and `or` are the Erlang conjunction and disjunction (infix) operators.
+
+##### Maximum of three
+
+Give a definition of the function maxThree which takes three integers and returns the maximum of the three. You can use the max function, which gives the maximum of two numbers, in writing your definition.
+
+```erlang
+maxThree(34,25,36) = 36
+```
+
+##### How many equal?
+
+Give a definition of the function howManyEqual which takes three integers and returns an integer, counting how many of its three arguments are equal, so that:
+
+```erlang
+howManyEqual(34,25,36) = 0
+howManyEqual(34,25,34) = 2
+howManyEqual(34,34,34) = 3
+```
+
 
 ### 1.16 - Summing up video (07:01)
 
