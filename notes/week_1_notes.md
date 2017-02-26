@@ -277,6 +277,10 @@ Using your text editor of choice, define a new module second.erl to include the 
       - I used hypotenuse in the perimeter
   - Which existing definitions can you modify to give you the answers?
 
+##### Workings
+
+See workings on [github](https://github.com/lomky/future-learn-erlang/tree/master/assignments/1_9)
+
 ### 1.10 - Erlang data: numbers and atoms video
 
 #### Erlng Data - Types
@@ -708,10 +712,30 @@ howManyEqual(34,25,34) = 2
 howManyEqual(34,34,34) = 3
 ```
 
+##### Workings
 
-### 1.16 - Summing up video (07:01)
+See workings on [github](https://github.com/lomky/future-learn-erlang/tree/master/assignments/1_15)
+
+
+### 1.16 - Summing up video
+
+Reviewing the topics covered this week.
+
+Another answer to xOr:
+
+```erlang
+xOr(true,X) ->
+  not(X);
+xOr(false,X) ->
+  X.
+```
+
+Note that this does not insist on the type of the second argument!
 
 ### 1.17 - Programs in Erlang - recap quiz
+
+  - Variables should be Initialcap
+  - remember that single quotes `''` make atoms, not strings
 
 
 ## Functions in Erlang
