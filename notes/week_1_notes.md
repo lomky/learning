@@ -743,22 +743,184 @@ Note that this does not insist on the type of the second argument!
 > In this activity we'll consider functions in Erlang. We'll introduce the key concept of recursion - both 'direct' and 'tail' recursion - for defining functions, and further explore the ideas of pattern matching.
 
 
-### 1.18 - Recursion on integers video (11:45)
+### 1.18 - Recursion on integers video
+
+We don't have traditional loops, though we can replicate it.  
+We rely on recursion for repetitive behavior.  
+
+#### Getting started with Recursion
+
+A first example of recursion.  
+Factorial of `N` is the product of `1*2*3*...*(N-1)*N`  
+Factorial of `0` is `1`  
+
+And in Erlang:  
+
+```erlang
+fac(0) ->
+  1;
+fac(N) ->
+  fac(N-1)*N.
+```
+
+And that's it!
+
+You can write out a calc of this step-by-step yourself:  
+`= fac(3)`  
+`= fac(2)*3`  
+`= (fac(1)*2)*3          ` Use the definition: replace the  
+`= ((fac(0)*1)*2)*3      ` left-hand side by right-hand side  
+`= ((1*1)*2)*3`  
+`= (1*2)*3`  
+`= 2*3`  
+`= 6`  
+
+What if we put a negative in?  
+Oops. It will never reach the base case.  
+We need to test for `N>0`  
+
+#### Guards
+
+```erlang
+fac(0) ->
+  1;
+fac(N) when N>0 ->
+  fac(N-1)*N.
+```
+
+So now what happens if we call `fac(-3)`?  
+We get a _failure_ of pattern matching!  
+This is an example of the Erlang philosophy: _let it fail!_  
+
+We don't know what to do to a negative to apply factorial, but handling the error isn't up to us. We should just fail.  
+
+You _can't_ put user defined functions in the guard. Why?  
+Because patterb matching is desired to always terminate. You should always get a yes or no. So you can only use simple calculations.  
+This also makes the guards compute quickly.  
+In general, you can use `case` expressions to do this, more later.
+
+#### Let it fail
+
+if we write a function / process o do something, and this fails for some reason, we _let it fail_.
+
+Why?
+
+It's the responsibility f the caller, who called the funciton erroneously, to sort it out. We can't predict what the right option is inside the function.
+
+#### Direct recursion
+
+```erlang
+fac(0) ->
+  1;
+fac(N) when N>0 ->
+  fac(N-1)*N.
+```
+
+This definition is _direct_ recursion, it fives a direct description of what it does.  
+The factorial of `0` _is_ `1`  
+The factorial of `N` _is_ the procut of the factorial of `(N-1)` and `N`.  
+We are directly describing the process of factorial.
 
 ### 1.19 - Recursion examples article
 
-### 1.20 - Recursion examples - feedback video (04:42)
+> The following exercises are designed to demonstrate your capability to use recursion and evaluation by hand in a number of practical examples.
 
-### 1.21 - Tail recursion video (06:22)
+#### Fibonacci sequence.
 
-### 1.22 - Tail recursion - feedback video (06:55)
+> Give a recursive definition of the function fib/1 computing the Fibonacci numbers, and give a step-by-step evaluation of fib(4).
 
-### 1.23 - Pattern matching revisited video (06:28)
+##### Definition
 
-### 1.24 - Pulling it all together assignment -
+```erlang
+fib(0) -> 1;
+fib(1) -> 1;
+fib(N) -> fib(N-2) + fib(N-1).
+```
 
-### 1.25 - Pulling it all together: review review
+##### Eval by Hand of fib(4)
 
-### 1.26 - Pulling it all together: reflection reflection
+```
+  fib(4)
+= fib(2) + fib(3)
+= (fib(1) + fib(0)) + (fib(1) + fib(2))
+= (fib(1) + fib(0)) + (fib(1) + (fib(1) + fib(0)))
+= (1 + 1) + (1 + (1 + 1))
+= 2 + (1 + 2)
+= 2 + 3
+= 5
+```
 
-### 1.27 - Week one summary video (03:09)
+#### How Many Pieces?
+
+> Define a function pieces so that pieces(N) tells you the maximum number of pieces into which you can cut a piece of paper with N straight line cuts.
+
+##### Definition
+
+```erlang
+howManyPieces(0) ->
+  1;
+howManyPieces(N) ->
+  howManyPieces(N-1)+N;
+```
+
+Notes after research:  
+  - should have put guards on to catch negative!
+
+##### Expansion to 3D & _N_D
+
+> If you’d like to take this problem further, think about the 3-dimensional case. Into how many pieces can you cut a wooden block with N saw cuts?
+
+Scratch attempts:  
+
+```erlang
+howManyPieces3D(0) ->
+  1; % 1
+howManyPieces3D(1) ->
+  2; % howManyPieces(N-1) 
+howManyPieces3D(2) ->
+  4; %
+howManyPieces3D(3) ->
+  8; %
+howManyPieces3D(4) ->
+  16; %
+
+howManyPieces(N) ->
+  howManyPieces(N-1)+N;
+```
+
+I'm not getting much of anywhere trying to brute force this. 
+
+Research: 
+
+Apparently, this is a really hard problem, in the math sense of hard! A bit mean to set us to work it casually!  
+Notes on how to do this [here](http://www.math.toronto.edu/mccann/assignments/199S/cuttingplanes.pdf)  
+A plausible solution a coursemate came up with (but no explanation):  
+
+```erlang
+pieces(0, _) -> 1;
+pieces(X,1) -> X+1;
+pieces(X, N) -> pieces(X-1, N) + pieces(X-1,N-1).
+```
+
+### 1.20 - Recursion examples - feedback video
+
+Works through the fibonacci series process and the 2D cutting problem logic.  
+
+Note: the definition we did for fib is a bit inefficient (calculate fib(2) twice!)
+
+I'd really love to see the proof for the cut problem.
+
+
+### 1.21 - Tail recursion video
+
+### 1.22 - Tail recursion - feedback video
+
+### 1.23 - Pattern matching revisited video
+
+### 1.24 - Pulling it all together assignment
+
+### 1.25 - Pulling it all together: review
+
+### 1.26 - Pulling it all together: reflection
+
+### 1.27 - Week one summary video
