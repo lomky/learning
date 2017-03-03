@@ -345,6 +345,150 @@ Content-Type: text/html
 
 ### Lecture 57 - Ajax Basics
 
+#### What is Ajax?
+
+stands for:  
+**Asynchronous Javascript and XML**
+
+  - while ajax started with XML, very few apps use it now
+  - Plain text, HTML, and JSON are used instead
+
+#### Traditional Web App Flow
+
+  - Starts with a web page.
+  - Press a button, sending an HTTP request to the server
+  - Server responds with a new page with a mostly-identical page
+
+#### Ajax Web App Flow
+
+  - Starts with a web page 
+  - Press a button, sending HTTP request to the server
+  - Server responds with a small piece of data that is inserted into the current page
+
+This is:
+
+  - faster
+  - takes less bandwidth
+  - nicer for the user
+
+#### Synchronous Execution
+
+The execution of one instruction at a time.  
+Can't start execution of another instruction until the first finishes its execution
+
+#### Asynchronous Execution
+
+Execution of more than one instruction at a time.  
+Asynchronous instruction returns right away.  
+The actual execution is done in a separate thread/process  
+
+How can Ajax be async when JS is sync?
+
+#### How Does Ajax Work?
+
+  - the browser
+    - Javascript Engine runs inside it
+    - Event Queue runs in the browser - speaks to JS Eng
+    - HTML Rendering engine - handles the display
+    - webGL - lets JS reach out and do some high end graphics work
+    - HTTP Requestor - responsible for reaching out to make requests
+
+While JS is Synchronous, the HTTP Requestor is _asynchronous_.
+
+#### Ajax Process
+
+```
+Javascript Engine                   HTTP Requestor
+_____________________                   _____________________
+|js code line        |                 |                     |
+|js code line        | provides JS fun |                     |
+|make Ajax req  ---------------------->|                     |
+|js code line        | response handler|                     |
+|js code line        |                 |                     |
+|js code line        |                 |                     |
+|js code line        |                 |                     |
+|Handle server resp  <------------------ executes the JS func|
+|    //callback      |                 | provided            |
+|    //function      |                 |                     |
+|____________________|                 |_____________________|
+```
+
+_See lecture examples for 57 for code examples_
+
+The Ajax utility script:
+
+```ajax
+(function (global) { 
+
+//set up a namespace for our utility
+var ajaxUtils = {};
+
+// returns an HTTP request object
+function getRequestObject() {
+  if (window.XMLHttpRequest) {
+    return (new XMLHttpRequest());
+  }
+  else if (window.ActiveXObject) {
+    //for very old IE browsers, optional
+    return (new ActiveXObject("Microsoft.XMLHTTP"));
+  }
+  else {
+    global.alert("Ajax is not supported!");
+    return(null);
+  }
+}
+
+// Makes an Ajax GET request to 'requestUrl'
+ajaxUtils.sendGetRequest = 
+  function(requestUrl, responseHandler) {
+    var request = getRequestObject(); //DO NOT MAKE THIS GLOBAL. Breaks Async with a race condition
+    request.onreadystatechange =
+      function() {
+        handleResponse(request, responseHandler);
+      };
+      request.open("GET", requestUrl, true); //true means async
+      request.send(null); //for POST only
+  };
+
+//Only calls uer provided 'responseHandler'
+// function if resposne is ready
+// and not an error
+function handleResponse(request, responseHandler) {
+  if ((request.readyState == 4) && (request.status == 200)) {
+    responseHandler(request);
+  }
+}
+
+//Expose utility to the global object
+global.$ajaxUtils = ajaxUtils;
+
+})(window);
+```
+
+And the corresponding Script.js
+
+```javascript
+//Event handling
+document.addEventListener ("DOMContentLoaded",
+  function (event) {
+
+    //Unobstrusive event binding
+    document.querySelector("button")
+      .addEventListener("click", function() {
+
+        //Call server to get the name
+        $ajaxUtils                                             // access the ajax utility
+          .sendGetRequest("/data/name.txt",                    // our URL
+            function (request) {                               // our handler function. The response object is still called request in JS.
+              var name = request.responseText;                 // the responseText of the request object holds the response from the server
+              document.querySelector("#content")               //this _must go_ in here. putting after means it will execute before ajax returns. (async!)
+                      .innerHTML = "<h2>Hello " + name + "!";  //and this does our content replacement like we learned last week
+          });
+    });
+  }
+);
+```
+
 ### Lecture 58 - Processing JSON
 
 
