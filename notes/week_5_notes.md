@@ -613,11 +613,54 @@ Now the page loads properly! But our menu categories are broken now.
 
 Now the goal is to have the menu categories load dynamically on click with all the proper content.  
 
+#### Heroku & CORS
+
 We offer our restaurant data on a separate ruby on rails app hosted on heroku. This is a bit of a problem, as we are breaking same origin loading javascript. CORS is the answer. Wikipedia goes into detail, but basically there is an HTTP header that whitelists the domain name we will get our data from.
 
+#### Examining the Snippets 
 
+  - Menu Categories title
+    - Just contains the heading of the Menu Categories 
+  - Menu Categories category
+    - Contains a snippet for One cateory.
+    - We can loop over this to show each new category.
+    - So for each category we will have events to populate them.
+
+#### Script.js
+
+Contains paths to our heroku paths to get data for allCategories
+and paths for our snippets for the home page, category titles, and category snippets.
+
+New function `insertProperty` replaces the `{{word}}` items in our snippets with the proper values.
+
+For our menu categories, we create the function `dc.loadMenuCategories`. Starts with the loading image and the invokes a `sendGetRequest` with the `allCategoriesUrl` and `buildAndShowCategoriesHTML` (the callback)  as arguments.
+
+In `buildAndShowCategoriesHTML` we send out another ajax request to get the categoryTitle. Inside that we call for the categoryHTML. 
+
+Now we have all the information we need to build the category with the function `buildCategoriesViewHTML` which takes all the pieces and puts them together. Finally we use insertHTML to replace the main-content.
+
+And we're done with the menu categories!
 
 ### Lecture 62 - Dynamically Loading Single Category View
 
+We have another REST API endpoint for the menu items for each category. Given the short name of the category, we get back the category itself and the items inside the given category.
+
+So we will set that base URL for our query, and use the short name as the key.
+
+In our script.js we add that URL and the new snippets for the menu item title snippet, and then menu items snippet.
+
+we have a new function `loadMenuItems` which looks a lot like the `loadCategoryItems` except now we pass in an argument for the short_name.
+
+It callsback to `buildAndShowMenuItemsHTML` which does the double Ajax request to get the title html and the menu item html that we will loop over.
+
+That calls to the `buildMenuItemsViewHTML` which builds the HTML, and finally we do the insert of the content.
+
 ### Lecture 63 - Changing 'active' Button Style Through Javascript
 
+Our active class that highlighted our place in the header no longer works with our Ajax setup. Let's fix that.
+
+script.js, new function `switchMenuToActive`
+
+It tells the home button to de-highlight and alerts the menu button to highlight.
+
+We are functionally complete!
