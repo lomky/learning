@@ -596,7 +596,26 @@ Now it works!
 
 ### Lecture 60 - Dynamically Loading Home View Content
 
+We want all the front page content to load dynamically. Why?  
+We're moving towards a single page web application (SPA).  
+Popular today. Heavily reliant on Ajax. Avoid reloading the header/footer every page.  
+
+To start, we wipe out the main content from the html.  
+Instead, we have things stored in separate files called snippets.  
+
+In the script we add functions that know how to load the content properly.  
+We set up our namespace for the web page functions.  
+Create a convinience function for inserting innerHTML for a selector  
+Another function showLoading places a nice loading gif to reassure the user content is loading.  
+Now the page loads properly! But our menu categories are broken now.
+
 ### Lecture 61 - Dynamic Loading Menu Categories View
+
+Now the goal is to have the menu categories load dynamically on click with all the proper content.  
+
+We offer our restaurant data on a separate ruby on rails app hosted on heroku. This is a bit of a problem, as we are breaking same origin loading javascript. CORS is the answer. Wikipedia goes into detail, but basically there is an HTTP header that whitelists the domain name we will get our data from.
+
+
 
 ### Lecture 62 - Dynamically Loading Single Category View
 
