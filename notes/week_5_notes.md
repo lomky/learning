@@ -491,10 +491,108 @@ document.addEventListener ("DOMContentLoaded",
 
 ### Lecture 58 - Processing JSON
 
+### What is JSON?
+
+JavaScript Object Notation
+
+  - Lightweight data-interchange format
+    - simple textual representation of data
+  - _Easy for humans_ to read and write
+  - _Easy for machines_ to parse and generate
+  - __Completely independent of any language__
+
+### JSON Syntax Rules
+
+  - Subset of Javascript object literal syntax
+    - Exceptions:
+    - Property names must be in _double_ quotes
+    - String values must be in _double_ quotes
+
+### JSON Example
+
+```JSON
+  "firstName": "Yaakov",  //note the double quotes
+  "lastName: "Chaikin",
+  "likesChineseFood: false, //literals can be unquoted
+  "numberOfDisplays": 2
+}
+```
+
+Can be made into a Javascript string by surrounding it with single quotes and assigning it.
+
+### Common Misconception
+
+  - JSON is NOT a Javascript Object literal
+  - JSON is just a string
+  - The syntax of JSON is based on object literal, though
+  - Need to convert JSON into a JS object if you want to treat it as such
+
+### Converting JSON to String & Back to JSON
+
+Converts from json string to object:  
+`var obj = JSON.parse(jsonString);`
+
+Converts from object to json string:  
+`var str = JSON.stringify(obj);`
+
+### The previous example, but now in JSON
+
+See the example files for Lecture 58.
+
+name.json contains:
+
+```JSON
+  "firstName": "Yaakov",
+  "lastName: "Chaikin",
+  "likesChineseFood: false,
+  "numberOfDisplays": 2
+}
+```
+
+ajax-utils.js gets updated.  
+Our `sendGetRequest` function gets a third argument, `isJsonResponse`.  
+This gets a `true` or `false` (default `true`) to expect json.  
+This is further passed into `handleResponse` as a third arg.  
+
+`handleResponse` now has the `isJsonResponse`  
+if undefined, we set it to `true`.  
+if `true`, our `responseHandler` passes in `JSON.parse(request.responseText)`  
+else we just give them the `request.responseText`  
+
+our script.js is updated:  
+in our `sendGetRequest` our `res` is now a JS object since we converted it in ajax.  
+we can use it via dot notation, `res.likesChineseFood` works just fine.  
+we can use if/else on those values to display varies text options.  
 
 ## Using Ajax to Connect Restaurant Site with Real Data
 
 ### Lecture 59 - Fixing Mobile Nav Menu Automatic Collapse
+
+This problem:  In our small screen the menu extends on clikcing hte button, but when we click off it it does not disappear.  
+This is the `onBlur` event.  
+
+When do we want to do this?  
+Not with the big buttons, only the collapsable button version.  
+This size is around the ~760px, which is one of our breakpoints.  
+
+See examples in the Lecture 59 `after` file.
+
+In our `script.js`:
+
+```javascript
+$(function () { // Same as document.addEventListener("DOMContentLoaded...)
+
+  $("navbarTogle")  // Same as document.querySelector("navbarToggle").addEventListener("blur",...)
+    .blur(function (event) {
+      var screenWidth = window.innerWidth;      //get hte width of hte inner window
+      if (screenWidth < 768) {                  // only on the smaller screen size!
+        $("#collapsable-nav").collapse('hide'); //select the collapsable nav, call collapse with value hide. This is bootstrap magic mixed with jQuery.
+      }
+  });
+});
+```
+
+Now it works!
 
 ### Lecture 60 - Dynamically Loading Home View Content
 
