@@ -20,7 +20,7 @@ Repository to hold my work for [Coursera's HTML/CSS/JS course](https://www.cours
     - [Instructions](https://github.com/jhu-ep-coursera/fullstack-course4/blob/master/assignments/assignment3/Assignment-3.md)
     - [Site](https://lomky.github.io/coursera-webdev/assignments/module3-solution/)
     - [Code](https://github.com/lomky/coursera-webdev/tree/master/assignments/module3-solution)
-  - Module 4 Assignment - Status: **Not Yet Started**
+  - Module 4 Assignment - Status: **Complete** - _Harder Version_
     - [Instructions](https://github.com/jhu-ep-coursera/fullstack-course4/blob/master/assignments/assignment4/Assignment-4.md)
     - [Site](https://lomky.github.io/coursera-webdev/assignments/module4-solution/)
     - [Code](https://github.com/lomky/coursera-webdev/tree/master/assignments/module4-solution)
