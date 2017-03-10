@@ -1,6 +1,8 @@
 # Coursera: HTML, CSS, and Javascript for Web Developers
 Repository to hold my work for [Coursera's HTML/CSS/JS course](https://www.coursera.org/learn/html-css-javascript-for-web-developers/home/welcome)
 
+Course Completed 2017-03.
+
 ## Notes
 
  - Week 1 - dead trees
@@ -24,7 +26,7 @@ Repository to hold my work for [Coursera's HTML/CSS/JS course](https://www.cours
     - [Instructions](https://github.com/jhu-ep-coursera/fullstack-course4/blob/master/assignments/assignment4/Assignment-4.md)
     - [Site](https://lomky.github.io/coursera-webdev/assignments/module4-solution/)
     - [Code](https://github.com/lomky/coursera-webdev/tree/master/assignments/module4-solution)
-  - Module 5 Assignment - Status: **Not Yet Started**
+  - Module 5 Assignment - Status: **Complete**
     - [Instructions](https://github.com/jhu-ep-coursera/fullstack-course4/blob/master/assignments/assignment5/Assignment-5.md)
     - [Site](https://lomky.github.io/coursera-webdev/assignments/module5-solution/)
     - [Code](https://github.com/lomky/coursera-webdev/tree/master/assignments/module5-solution)
