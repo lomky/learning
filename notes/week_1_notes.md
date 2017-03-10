@@ -913,7 +913,113 @@ I'd really love to see the proof for the cut problem.
 
 ### 1.21 - Tail recursion video
 
+#### Direct Recursion
+
+```erlang
+fac(0) -> 
+  1;
+fac(N) when N>0 ->
+  fac(N-1)*N.
+```
+
+This definition is _direct_ recursion. It gives a direct description of what it does.
+
+The factorial of 0 _is_ 1.
+The factorial of N _is_ the product of the factorial of (N-1) and N.
+
+#### Recursion revisited
+
+```erlang
+fac(N) ->
+  fac(N,1).
+
+fac(0, P) ->
+  P;
+fac(N, P) when N>0 ->
+  fac(N-1,P*N).
+```
+
+What's going on here?  
+`fac(3)`  
+`= fac(3, 1)`  
+`= fac(2, 3)`  
+`= fac(1, 6)`  
+`fac(0, 6)`  
+`= 0`  
+
+This is called _tail recursion_.  
+The recursive call is the last thing in the body of the function (a "tail call").  
+Can be implemented very efficiently, no stack involved.  
+Just like a _loop_, and the parameters are like _variables_. One of them is collecting the result.
+
+Equivalent to the loop:
+
+```
+P,N;
+while (N>0) {
+  P = P*N;
+  N = N-1;
+}
+return P;
+```
+
+#### Looping the loop
+
+```erlang
+  loop (N) when N>0 ->
+    io:format("~p~n",[N]),
+    loop(N-1);
+  loop(N) ->
+    io:format("bye~n"),
+```
+
+What does this do?
+
+```erlang
+1>loop(3).
+3
+2
+1
+bye
+ok
+```
+
+`io:format` - each ~p replaced with the corresponding value form the list of values  
+
+#### Documentation 
+
+Documentation of all Erlang modules can be found online at www.erlang.org/doc/  
+All modules listed.  
+Otherwise, just google erlang and the module name.
+
+#### More examples to try
+
+#### List of numbers
+
+Given a function `F` from integers to integers,
+
+  - find the _sum_ of the values `F(0), F(1),...,F(N-1),F(N)`
+  - find the _maximum_ of the values `F(0), F(1),...,F(N-1),F(N)`
+
+#### Fibonacci numbers
+The Fibonacci sequence is given by 0, 1, 1, 2, 3, 5, … where subsequent values are given by adding the two previous values in the sequence.
+
+The function fib/1 that we defined earlier is exponentially complex … ouch! Define an efficient Fibonacci function fib/3 using a tail recursion with two accumulating parameters that hold the last two Fibonacci numbers. Give a step-by-step evaluation of fib(4).
+
+#### Perfect numbers
+A positive integer is perfect when it is the sum of its divisors, e.g. 6=1+2+3, 28=1+2+4+7+14.
+
+Define a function perfect/1 that takes a positive number N and returns a boolean which indicates whether or not the number is perfect. You may well want to use an accumulating parameter to hold the sum of the divisors “so far”.
+
+#### Thoughts
+
+I find thinking in tail recursion quite hard atm.
+
 ### 1.22 - Tail recursion - feedback video
+
+See downloaded_example tail.erl
+
+I will need more practice thinking in this methodology.
 
 ### 1.23 - Pattern matching revisited video
 
