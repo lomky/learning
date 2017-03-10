@@ -7,7 +7,6 @@ Repository to hold my work for [Coursera's Ruby on Rails MongoDB course](https:/
  - [Week 2](https://lomky.github.io/coursera-ror-mongodb/notes/week_2_notes)
  - [Week 3](https://lomky.github.io/coursera-ror-mongodb/notes/week_3_notes)
  - [Week 4](https://lomky.github.io/coursera-ror-mongodb/notes/week_4_notes)
- - [Week 5](https://lomky.github.io/coursera-ror-mongodb/notes/week_5_notes)
  
 ## Assignments
 

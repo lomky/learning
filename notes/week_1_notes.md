@@ -92,12 +92,7 @@ Vertical Vs Horizontal Scaling
 | ID | Attributes |
 |----|----|
 | 1234 | John Doe |
-| 1235 | {
-  "Name" : "Godfather",
-  "Genre" : "Drama",
-  "Actor" : "Robert DeNiro",
-  "Director" : "Francis Ford Coppola"
-} |
+| 1235 | { "Name" : "Godfather", "Genre" : "Drama", "Actor" : "Robert DeNiro", "Director" : "Francis Ford Coppola" } |
 
 #### Categories of NoSQL - Document
 
@@ -109,20 +104,7 @@ Vertical Vs Horizontal Scaling
 
 |  |
 |----|
-| {
-  "id": 1234,
-  "name": "Departed",
-  "actors": [
-    {
-      "actor": "Leo"
-    },
-    {
-      "actor": "Jack"
-    }
-  ],
-  "director": "Scorsese",
-  "genre": "drama"
-} |
+| { "id": 1234, "name": "Departed", "actors": [ { "actor": "Leo" }, { "actor": "Jack" } ], "director": "Scorsese", "genre": "drama" } |
 
 #### Categories of NoSQL - Column
 
@@ -146,8 +128,8 @@ Vertical Vs Horizontal Scaling
     - Neo4J
 
 ```
-                      ____________
-                      | Departed  |           ___________
+                       ____________
+                       | Departed  |           ___________
 ___________  --------> |___________| --------> | Scorsese |
 | DiCaprio |           __________              |__________|
 |__________| --------> | Titanic |
