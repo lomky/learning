@@ -411,11 +411,8 @@ irb(main):008:0>
   - DB, document, collection
   - mongoDB ruby driver & irb
 
-### CRUD
-
+## CRUD
 ### Inserting Documents
-
-### Practice Programming Assignment - MongoDB Ruby Driver CRUD
 
 ### Find
 
