@@ -413,6 +413,46 @@ irb(main):008:0>
 
 ## CRUD
 ### Inserting Documents
+#### Topics
+
+ - "C"reate in CRUD
+ - `insert_one`
+ - `insert_many`
+
+#### "C"reate in CRUD
+
+ - Select a collection on the client and call `insert_one` or `insert_many`
+ - `insert_one`: insert _one_ document to collection
+ - `insert_many`: insert _multiple documents to the collection
+
+#### `insert_one`
+
+  - `db[:zips].insert_one(:_id => "100",:city => "city01", :loc => [ -76.059227000001, 39.564894], :pop => 4678, :state => "MD")`
+  - you can test success with `find` and `count`
+    - `db[:zips].find(:city => "city01").count`
+  - These are Ruby hash: parameters going into the call
+
+#### `insert_many`
+
+This inserts many documents into a collection. Can have any number of documents
+
+```
+db[:zips].insert_many( [
+{ :_id => "200",:city => "city02", :loc => [ -76.059227000001, 37.564894], :pop => 44678, :state => "CA" },
+{ :_id => "201",:city => "city03", :loc => [ -75.059227000001, 35.564894], :pop => 3000, :state => "CA" }
+])
+```
+
+#### "_id" field
+
+  - _id - primary key for _every_ document
+  - default field of the BSON object and is _indexed automatically_
+  - you can add a _custom_ "id" field if you like, but it won't be the same as _id
+
+
+#### Summary
+
+  - you can insert one or many documents, and check they inserte via lookups
 
 ### Find
 
