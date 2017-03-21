@@ -609,6 +609,49 @@ Can find these on the mongodb docs for bson-types
 
 ### Replace, Update, and Delete
 
+#### Topics
+
+  - replace_one
+  - update_one
+  - update_many
+  - delete_one
+  - delete_many
+  - upsert
+
+#### `replace_one`
+
+  - `replace_one` - _replace_ one doc in the collection according to the _specified parameters_
+    - replaces an entire document!
+  - `db[:zips].insert_one(:_id => "100", :city => "citytemp", :loc => [-76.2342, 39.5234 ], :pop => 4678, :state => "MD" )`
+  - `db[:zips].find(:_id => "100").replace_one(:_id => "100", :city => "city_02", :loc => [-76.2342, 39.5234 ], :pop => 3000, :state => "MD" )`
+  - `db[:zips].find(:_id => "100").to_a`
+
+#### `update_one`
+
+  - `update_one` updates a field in a single document
+  - `db[:zips].find(:_id => "100").update_one(:$set => {:city => "name2"})`
+
+#### `update_many`
+
+  - `update_many` _updates single or multiple_ documents in the collection according to the _specified arguments_
+  - change all states from MD to XX
+    - `db[:zips].find(:state => 'MD').update_many(:'$set' => {state:'XX'})`
+
+#### `delete_one`
+
+  - `delete_one` deletes a single document matching the parameters
+  - `db[:zips].find(:_id => "100").delete_one()
+
+#### `delete_many`
+
+  - `delete_many` deletes multiple documents based on the criteria
+  - `db[:zips].find(:state => 'MD').delete_many()
+
+#### `upsert` criteria
+
+  - if upsert is `true` and _no_ document matches the query criteria, update() inserts a _single_ document
+  - Neither ODENVILLE1 nor ODENVILLE2 exist, but because upsert is true, it will insert and then update the object
+    - `db[:zips].find(:city => "ODENVILLE1").update_one({:$set => {:city => "ODENVILLE2"}}, :upsert => true)`
 
 ## Integrating MongoDB and Rails
 ### Introduction: Integrating MongoDB with Ruby Driver

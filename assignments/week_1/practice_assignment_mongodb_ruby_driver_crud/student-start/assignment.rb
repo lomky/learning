@@ -86,19 +86,18 @@ class Solution
   def find_by_letter(letter, offset, limit) 
     letter = letter.upcase
     @coll.find(:last_name => {:$regex => "^#{letter}"}).sort(:last_name => 1).skip(offset).limit(limit)
-      #`db[:zips].find(:city => {:$regex => '^X'}).limit(5).each{|r| pp r}`
   end
 
   #
   # Lecture 5: Updates
   #
-  
+
   def update_racer(racer)
-    #place solution here
+    @coll.find(:_id => racer[:_id]).replace_one(racer)
   end
 
   def add_time(number, secs)
-    #place solution here
+    @coll.find(:number => number).update_one(:$inc => {secs: secs})
   end
 
 end
