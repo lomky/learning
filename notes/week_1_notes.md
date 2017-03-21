@@ -515,6 +515,34 @@ db[:zips].insert_many( [
 
 ### Paging
 
+#### Topics
+  - Paging
+    - Limit and Skip
+    - Sort
+
+#### Paging
+
+  - Paging is accomplished with `skip` and `limit`
+  - `skip(n)` - tells mongodb to skip 'n' number of results
+  - `limit(n)` - tells mongodb to limit the result length to 'n' results
+
+##### Paging - Limit
+  - `db[:zips].find.limit(3).each { |r| pp r }
+    - retrieves a list of the first three documents for us
+
+##### Paging - Skip
+  - `db[:zips].find.skip(3).limit(3).each { |r| pp r }
+    - retrieves a list of three documents, skipping the first three documents
+
+#### `Sort` controls
+
+  - `sort` - specifies the order in which the query returns matching docs
+    - `{ field: value }`
+  - 1 for Ascending
+    - `db[:zips].find.limit(3).sort({:city => 1}).each { |r| pp r}`
+  - -1 for Descending
+    - `db[:zips].find.limit(3).sort({:city => -1}).each { |r| pp r}`
+
 ### Advanced Find
 
 ### Replace, Update, and Delete
