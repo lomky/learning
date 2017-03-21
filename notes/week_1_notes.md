@@ -545,6 +545,68 @@ db[:zips].insert_many( [
 
 ### Advanced Find
 
+#### Topics
+  - Find by criteria
+    - 'lt' & 'gt'
+    - Evaluations
+    - Regex
+    - Exists
+    - Not
+    - Type
+
+#### `Find` controls with lt and gt operator
+
+  - `db[:zips].find(:city => {:$lt => 'D'}).limit(2).to_a.each { |r| pp r}`
+  - `db[:zips].find(:city => {:$lt => 'P', :$gt => 'B'}).limit(2).to_a.each { |r| pp r}`
+
+#### Find By - Regex
+
+  - Regex - supports regex capability for pattern matching _strings_ in queries
+  - Retrieve cities containing X in their names
+    - `db[:zips].find(:city => {:$regex => 'X'}).limit(5).each{|r| pp r}`
+  - Retrieve cities ending with X
+    - `db[:zips].find(:city => {:$regex => 'X$'}).limit(5).each{|r| pp r}`
+  - Retrieve cities starting with X
+    - `db[:zips].find(:city => {:$regex => '^X'}).limit(5).each{|r| pp r}`
+  - Retrieve cities starting with A through E
+    - `db[:zips].find(:city => {:$regex => '^[A-E]'}).limit(5).each{|r| pp r}`
+
+Ruby regex presumably
+
+#### $exists
+
+  - will check to see if the focument exists, given boolean `true`
+  - if there is a field named city, return the document
+    - `db[:zips].find(:city => { :$exists => true}).projection({:_id => false}).limit(3).to_a.each {|r| pp r}`
+  - useful since there is no schema.
+
+#### `$not`
+
+  - `$not` performs the logical `NOT`
+  - selects the docs that _do not match) the <operator-expression>
+  - find where the population is _not_ greating that 9500
+    - `db[:zips].find(:pop => {'$not' => {'$gt' => 9500}}).projection({_id:false}).limit(20).to_a.each {|r| pp r}`
+
+#### $type
+
+  - `$type` selects the docs where the vale of the field is an _instance) of the specified numeric BSON type
+  - handy when dealing with _unstructured data_ where types are not predictable.
+  - give me docs where the states are strings:
+    - `db[:zips].find({:state => {'$type' => 2}}).first`
+
+##### Types
+
+Can find these on the mongodb docs for bson-types
+
+  - 1 double
+  - 2 string
+  - 3 obecjst
+  - 4 array
+  - 5 binary data
+  - 6 undefined
+  - 7 object id
+  - 9 boolean
+
 ### Replace, Update, and Delete
 
 
