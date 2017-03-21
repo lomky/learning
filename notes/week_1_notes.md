@@ -456,6 +456,63 @@ db[:zips].insert_many( [
 
 ### Find
 
+#### Topics
+
+  - "R"ead in CRUD
+  - `find` (by example) operations
+  - Cursor iterations
+  - Pretty printing
+  - Projections
+
+#### "R"ead in CRUD
+
+  - `find` command
+  - `find` - returns a _cursor_ object - allows us to _iterate_ over the selected document(s)
+  - can be used with _query_ criteria
+
+#### find by example
+
+  - basic find
+    - `db[:zips].find(:city => "BALTIMORE")`
+  - query conditions
+    - `db[:zipz].find.distinct(:state)` # how many distinct states
+    - `db[:zips].find(:city => "BALTIMORE").count` # the count of cities named baltimore
+
+#### Pretty Printing
+
+  - pretty printing the result:
+    - `pp db[:zips].find(:city => "GERMANTOWN", :state => "NY").first`
+        - note how you can do more than one thing in the hash
+  - must require pp!
+    - `require 'pp'`
+
+    - pp makes the output more legible
+
+#### Cursor Iterations
+
+  - print all
+    - `db[:zips].find().each { |r| puts r }` 
+
+#### Projections
+
+  - `Limits` the fields to return from all matching docuemnts
+    - Can _specify_ inclusion or exclusion
+  - _id is automatically included by _default_
+  - true or 1: _inclusive_
+  - false or 0: _exclusive_
+
+  - Examples
+    - `db[:zips].find({state => "MD"}).projection(state:true).first`
+        - this gives both _id and state
+    - `db[:zips].find({state => "MD"}).projection(state:true, _id:false).first`
+
+  - you can set false on any value
+
+#### Summary
+
+  - find to find documents by criteria
+  - projections - select only the necessary data
+
 ### Paging
 
 ### Advanced Find
