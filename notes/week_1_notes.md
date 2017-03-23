@@ -750,7 +750,153 @@ collection.count
 
 ### DAO Class Infrastructure
 
+#### DAO Class
+
+  - Model class
+    - _connects_ to MongoDB
+    - Access to the _collection_ (example: zips)
+    allows you to manipulate the collection
+  - _Consistent_ with ORM operations
+    - find, insert, update, delete methods in the DAO class
+
+#### DAO Class - zip.rb
+
+Under the model folder in the project
+
+```ruby
+class Zip
+
+  # convenience method of access to client in console
+  def self.mongo_client
+    Mongoid::Clients.default
+  end
+
+  # convenience method of access to zips collection
+  def self.collection
+    self.mongo_client['zips']
+  end
+end
+```
+
+#### Summary
+
+  - Simulating a middleware ORM that is consistent with the Rails ActiveModel framework
+  - "Data Access Object" and "Entity" at the same time
+  - later on, we will get this out of the box.
+
 ### CRUD
+#### Topics
+
+  - CRUD
+
+#### DAO Class - ORM Mapping
+
+  - `all`     - maps to `find`
+  - `find`    - maps to `find(hash)`
+  - `save`    - maps to `insert_one`
+  - `update`  - maps to `update_one`
+  - `destroy` - maps to `delete_one`
+
+#### Adding Methods to Zips - `all`
+
+  - `all`
+    - returns all deocuments in zips collection
+  - `self.all(prototype={}, sort={:population=>1}, offset=0, limit=100)`
+    - paging and sorting
+
+Adding this to the `zips.rb`
+
+```
+  def self.all(prototype={}, sort={:population=>1}, offset=0, limit=100)
+    # Code here we will come back to.
+```
+
+Invoked in the console:
+
+```
+> Zip.mongo_client
+=> ...
+> Zip.mongo_client[:zips]
+=> ...
+> Zip.collection.find.count
+=> 29353
+> Zip.all.count
+=> 29353
+> Zip.all({:state => 'NY'},{:population => -1},0,1).first
+=> {"_id"=>"11226", "city"=>"BROOKLYN", "pop"=>111396, "state"=>"NY"}
+```
+
+#### Adding Methods to Zips - `find` and `save`
+
+  - `find id`
+    - return a _specific_ instance for a given `id`
+  - `save`
+    - save the state of the _current_ instance
+
+In `zips.rb`
+
+```ruby
+  def self.find id
+    doc=collection.find(:_id=>if)
+                  .projection({_id:true, city:true, state:true, pop:true})
+                  .first
+    return doc.nil ? nil : Zip.new(doc)
+  end
+
+  def save
+    self.class.collection
+              .insert_one(_id:@id, city:@city, state:@state, pop:@population)
+  end
+```
+
+Invoked in the console:
+
+```
+> Zip.find("11226").population
+=> 111396
+> zip=Zip.new({:id => "00002", :city => "Dummy City", :state -> "WY", :population => 3})
+=> ...
+> zip.save
+=> ...
+```
+
+#### Adding Methods to Zips - `Update` and `destroy`
+
+  - `Update(updates_hash)`
+    - accepts as _hash_ and performs an _update_ on those values ater accounting for any name mappings
+  - `destroy`
+    - _delete_ the document from the database that is associated with the instance's `:id`
+
+In `zips.rb`
+
+```ruby
+  def update(updates)
+    updates[:pop]=updates[:population] if !updates[:population].nil?
+    updates.slice!(:city, :state, :pop) if !updates.nil?
+
+    self.class.collection
+              .fid(_id:@id)
+              .update_one(updates)
+  end
+
+  def destroy
+    self.class.collection
+              .find(_id:@id)
+              .delete_one
+```
+
+Invoked in console:
+
+```
+> zip=Zip.find "00001"
+=> ...
+> zip.update({:population=>4})
+=> ...
+> zip.destroy
+=> ...
+> zip=Zip.find "00001"
+=> nil
+```
 
 ### Scaffolding
 
