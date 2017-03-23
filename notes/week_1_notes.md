@@ -656,7 +656,97 @@ Can find these on the mongodb docs for bson-types
 ## Integrating MongoDB and Rails
 ### Introduction: Integrating MongoDB with Ruby Driver
 
+#### Topics
+
+  - Foundation blocks for integration MongoDB with Ruby Driver
+
+#### Setup and DAO
+
+  - Setup
+    - New rails app - `mongoid`
+  - Data Access Obects (DAO) class infrastructure
+    - Connection, database, collection
+
+#### CRUD Operations
+
+  - CRUD
+    - `all`
+    - `find`
+    - `insert`
+    - `update`
+    - `delete`
+
+#### Scaffolding
+
+  - Scaffolding
+    - Controller
+    - Views
+    - _Note: does *not* create the model class_
+
+#### Pagination
+
+  - Paging - MVC application with _paging_
+  - `will_paginate`
+  - Will add page properties
+
+#### Summary
+
+  - Goals:
+    - Build a working MVC example
+    - simulate a middleware ORM consistent with the Rails ActiveModel framework
+
 ### Rails Setup
+
+#### Topics
+
+  - Rails setup
+  - `mongoid` installation
+
+#### New Application
+
+  - Create new application
+    - `rails new zips`
+  - Add `mongoid` gem to Gemfile
+    - Note: Mongoig will be covered in depth in Module 3
+    - `gem 'mongoid', '~> 5.0.0'`
+
+#### Configuring mongoid.yml
+
+  - Mongo database configuration
+    - `rails g mongoid:config`
+      - takes the name of the project and sets up the test database
+  - mongoid.yml - databse connection information
+  - `config/application.rb` - bootstraps mongoid within applications -- like rails console
+    - `Mongoid.load!('./config/mongoid.yml')` - line 24 in the file
+
+#### Importing Data
+
+  - Import zips.json into your app
+    - `mongoimport --db zips_development -- collection zips --file zips.json`
+
+#### Start Rails Server
+
+  - Start Server (_inside zips folder_)
+    - `rails s`
+
+#### Start Rails Console
+
+  - Rails console
+    - `rails c`
+  - Rails console - very handy for poking around, basic calls, debugging, etc.
+
+In the console:
+
+```
+mongo_client=Mongoid::Clients.default
+> #<Mongo::Client....
+mongo_client.database.name
+> "zips development"
+collection=mongo_client[:zips]
+> ...
+collection.count
+> 29353
+```
 
 ### DAO Class Infrastructure
 
