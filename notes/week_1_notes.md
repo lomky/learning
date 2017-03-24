@@ -899,11 +899,148 @@ Invoked in console:
 ```
 
 ### Scaffolding
+#### Topics
+
+  - Model mixin
+  - `scaffold` command
+  - helpers
+    - do translation & conversion
+
+####  ActiveMode::Model Mixin Behavior
+
+```ruby
+class Zip
+  include ActiveModel::Model  # this mixin the ActiveModel
+
+  # create some helpful methods
+  def persisted?
+    !@id.nil?
+  end
+  def created_at
+    nil
+  end
+  def updated_at
+    nil
+  end
+```
+
+#### `scaffold` command
+
+  - `rails g scaffold_controller Zip id city state population:integer`
+    - uses the rails scaffolding to create the controller with our needed properties
+
+#### Helpers
+
+```ruby
+module ZipsHelper
+  def toZip(value)
+    #Change value to a Zip object
+    return value.is_a?(Zip) ? value : Zip.new(value)
+  end
+end
+```
+
+  - `app/helpers/zips_helper.rb` - method will convert a Mongo document into a ruby class instance
+  - `app/views/zips/index.html`
+    - `<% @zips.each do |zip| %>` 
+      `<% zip = toZip(zip) %>`
 
 ### MVC Application
+#### Topics
+
+  - `show`
+  - `new` and `create`
+  - `edit` and `update`
+  - `destroy`
+  - `paging`
+
+#### Show
+
+```ruby
+#GET /zips/{id}
+#GET /zips/{id}.json
+  before_action :set_zip, only: [:show, :edit, :update, :destroy]
+  def set_zip
+    @zip = Zip.find(params[:id])
+  end
+
+  def show
+  end
+```
+
+#### New and Create
+
+```ruby
+#POST /zips/new
+  def new
+    @zip = Zip.new
+  end
+
+#POST /zips
+  def create
+    @zip = Zip.new(zip_params)
+
+    respond_to do |format|
+      if @zip.save
+        format.html { redirect_to @zip, notice: 'Zip was successfully created.' }
+        format.json {render :show, status: :created, location: @zip }
+      else
+        format.html { render :new }
+        format.json { render json: @zip.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+```
+
+#### Edit and Update
+
+```ruby
+#GET /zips/{id}
+  before_action :set_zip, only: [:show, :edit, :update, :destroy]
+  def set_zip
+    @zip = Zip.find(params[:id])
+  end
+
+  def edit
+  end
+
+#PUT /zips/{id}
+  def update
+    respond_to do |format|
+      if @zip.update(zip_params)
+        format.html { redirect_to @zip, notice: 'Zip was successfully updated.' }
+        format.json {render :show, status: :ok, location: @zip }
+      else
+        format.html { render :new }
+        format.json { render json: @zip.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+```
+
+#### Paging
+
+  - `gem 'will_paginate', '~> 3.0.7'`
+
+In the controller:
+
+```ruby
+  def index
+    @zips = Zip.paginate(:page => params[:page])
+  end
+```
+
+Add in the view:
+
+```ruby
+<%= will_paginate @zips %>
+```
 
 ### MongoLab Setup
 
+Setting up our database on the mongolab site.
+
 ### Heroku Setup
 
+Setting up on heroku
 

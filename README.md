@@ -14,10 +14,10 @@ Repository to hold my work for [Coursera's Ruby on Rails MongoDB course](https:/
     + Practice 1 - Status: **Complete**
       * [Instructions](https://github.com/jhu-ep-coursera/fullstack-course3-module1/tree/master/Assignments/Lesson01-MongoDB-Connection/student-start#module-1-assignment-1-mongodb-ruby-driver-connection) & [Bootstrap](https://github.com/jhu-ep-coursera/fullstack-course3-module1)
       * [Code](https://github.com/lomky/coursera-ror-mongodb/tree/master/assignments/week_1/practice_assignment_mongodb_ruby_driver_connection)
-    + Practice 2 - Status: **Not Yet Started**
+    + Practice 2 - Status: **Complete**
       * [Instructions](https://github.com/jhu-ep-coursera/fullstack-course3-module1/blob/master//Assignments/Lesson02-CRUD/student-start/README.md) & [Bootstrap](https://github.com/jhu-ep-coursera/fullstack-course3-module1/)
       * [Code](https://github.com/lomky/coursera-ror-mongodb/tree/master/assignments/week_1/practice_assignment_mongodb_ruby_driver_crud)
-    + Assignment - Status: **Not Yet Started**
+    + Assignment - Status: **In Progress**
       * [Instructions](https://drive.google.com/file/d/0Bwvt4e6DQqn4ZVBkc0pLSG0yaGs/view?usp=sharing) & [Bootstrap](https://drive.google.com/file/d/0Bwvt4e6DQqn4QXU4NlFNRmcydWc/view?usp=sharing)
       * [Code](https://github.com/lomky/coursera-ror-mongodb/tree/master/assignments/week_1/assignment_integrating_mongodb_ruby_driver_rails)
   - Module 2
