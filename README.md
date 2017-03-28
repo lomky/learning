@@ -21,9 +21,15 @@ Repository to hold my work for [Coursera's Ruby on Rails MongoDB course](https:/
       * [Instructions](https://drive.google.com/file/d/0Bwvt4e6DQqn4ZVBkc0pLSG0yaGs/view?usp=sharing) & [Bootstrap](https://drive.google.com/file/d/0Bwvt4e6DQqn4QXU4NlFNRmcydWc/view?usp=sharing)
       * [Code](https://github.com/lomky/coursera-ror-mongodb/tree/master/assignments/week_1/assignment_integrating_mongodb_ruby_driver_rails)
   - Module 2
+    + Practice 1 - Status: **In Progress**
+      * [Instructions](https://github.com/jhu-ep-coursera/fullstack-course3-module2/blob/master/Assignments/Lesson01-Aggregration-Framework/student-start/README.md) & [Bootstrap](https://github.com/jhu-ep-coursera/fullstack-course3-module2)
+      * [Code](https://github.com/lomky/coursera-ror-mongodb/tree/master/assignments/week_2/practice_assignment_aggregation_framework/)
+    + Practice 2 - Status: **Not Yet Started**
+      * [Instructions]() & [Bootstrap]()
+      * [Code](https://github.com/lomky/coursera-ror-mongodb/tree/master/assignments/week_2/practice_assignment_schema_design/)
     + Assignment - Status: **Not Yet Started**
       * [Instructions](https://drive.google.com/file/d/0Bwvt4e6DQqn4dlBOTG9DRlYzZTQ/view?usp=sharing) & [Bootstrap](https://drive.google.com/file/d/0Bwvt4e6DQqn4cWZ0V3UzY044Qk0/view?usp=sharing)
-      * [Code](https://github.com/lomky/coursera-ror-mongodb/tree/master/assignments/)
+      * [Code](https://github.com/lomky/coursera-ror-mongodb/tree/master/assignments/week_2/assignment_advanced_mongodb_ruby_driver_topics)
   - Module 3
     + Assignment - Status: **Not Yet Started**
       * [Instructions](https://drive.google.com/file/d/0Bwvt4e6DQqn4ZEprREJwWWVTRjQ/view?usp=sharing)
