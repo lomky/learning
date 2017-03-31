@@ -115,11 +115,26 @@ class Solution
   # Lecture 4: $match
   #
   def groups_faster_than criteria_time
-    #place solution here
+    @coll.find.aggregate([
+              {:$group=>{
+                :_id=>{:age=>'$group', :gender=>'$gender'},
+                :runners=>{:$sum=>1},
+                :fastest_time=>{:$min=>'$secs'}
+              }},
+              {:$match=>{:fastest_time=>{:$lte=>criteria_time}}}
+    ])
   end
 
   def age_groups_faster_than age_group, criteria_time
-    #place solution here
+    @coll.find.aggregate([
+              {:$match=>{:age_group=>{:$eq=>age_group}}},
+              {:$group=>{
+                :_id=>{:age=>'$group', :gender=>'$gender'},
+                :runners=>{:$sum=>1},
+                :fastest_time=>{:$min=>'$secs'}
+              }},
+              {:$match=>{:fastest_time=>{:$lte=>criteria_time}}}
+    ])
   end
 
 
@@ -127,10 +142,28 @@ class Solution
   # Lecture 5: $unwind
   #
   def avg_family_time last_name
-    #place solution here
+     @coll.find.aggregate([
+              {:$match=>{:last_name=>{:$eq=>last_name}}},
+              {:$group=>{
+                :_id=>"$last_name", 
+                :avg_time=>{:$avg=>'$secs'},
+                :numbers=>{:$push=>'$number'}
+              }}
+     ])
   end
   
   def number_goal last_name
+     @coll.find.aggregate([
+              {:$match=>{:last_name=>{:$eq=>last_name}}},
+              {:$project=>{:_id=>0, :last_name=>1, :number=>1, :avg_time=>1}},
+              {:$group=>{
+                :_id=>"$last_name", 
+                :avg_time=>{:$avg=>'$secs'},
+                :numbers=>{:$push=>'$number'}
+              }},
+              {:$unwind=>'$avg_time'}
+     ])
+
     #place solution here
   end
 

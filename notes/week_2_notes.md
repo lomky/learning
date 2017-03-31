@@ -173,9 +173,38 @@ See video timestamp: 04:10
 
 ### `$match`
 
+#### $match
+
+  - $match _pipes_ the docs that _match its conditions_ to the next operator in the pipeline.
+  - The $match qery syntax is _identical_ to the read operation query syntax (`find`).
+  - $match - placed _early_ in the query - $match operations _minimize_ the amount of processig down the pipe
+
+#### Example
+
+  - Find and match result in the same info:
+    - `db[:zips].find({:state=>'DE'}).first`
+    - `db[:zips].find().aggregate([ {:$match => {:state=>'DE'}}]).first`
+
+  - Find me all the states that have New York
+    - `db[:zips].find().aggregate([{:$match=>{:state=>'NY'}}, {:$group=>{ "_id=>'$city', :population=>{:$sum=>'$pop'}}}, {:$project=>{ :_id=>0, :city=>'$_id', :population=>1}}, {:$sort=>{ :population=>-1 }}, {:$limit=>5}]).each {|r| pp r}`
+
 ### `$unwind`
+#### $unwind
+
+  - _Peels off_ the elements of an array _individually_, and returns a _stream_ of docs
+  - $unwind returns _one doc_ for every member of hte unwould array within _every_ source document.
+
+#### Examples
+
+  - without unwind:
+    - `db[:zips].find().aggregate([{:$match=>{:city=>'ELMIRA'}}, {:group=>{:_id=>{:city=>'$city',:state=>'$state'}, :zips=>{:addToSet=>'$_id}}}]).each {|r| pp r}`
+    - Note: Observe "ELIMIRA,NY", we have all three zips gathered into one
+  - with unwind:
+    - `db[:zips].find().aggregate([{:$match=>{:city=>'ELMIRA'}}, {:group=>{:_id=>{:city=>'$city',:state=>'$state'}, :zips=>{:addToSet=>'$_id}}}, {:$unwind=>'$zips'}]).each {|r| pp r}`
+    - Note: Observe "ELIMIRA,NY", we have all each of hte three zips entry for ELIMIRA as a distinct entry
 
 ## Schema Design
+
 ### Schema Design
 
 ### Normalization
