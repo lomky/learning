@@ -204,12 +204,110 @@ See video timestamp: 04:10
     - Note: Observe "ELIMIRA,NY", we have all each of hte three zips entry for ELIMIRA as a distinct entry
 
 ## Schema Design
-
 ### Schema Design
+#### Topics
+
+  - MongoDB - schema design
+  - Document store - mapping
+  - Application specific vs independent approach
+  - schemaless and content richness
+
+#### Document Store (Mapping)
+
+  - Row    -> JSON Doc
+  - Column -> Field
+
+#### MongoDB - BSON Types
+
+  - BSON - buinary serializaiton formet used to _store documents_ and _make remote procedure calls_ in mongoDB
+  - BSON support data types:
+    - string
+    - integrer
+    - boolean
+    - double
+    - min/mac
+    - arrays
+    - timestamp
+    - object
+    - nill
+    - symbol
+    - date
+    - object id
+    - binary data
+    - code
+    - regex
+
+#### MongoDB - Schema Design
+
+  - Support _Rich_ Document
+    - Embedded/Linked data (joins)
+    - No contraints (no Foreign Key) - makes it very _flexible_)
+  - Schema-Less
+    - Conceptually yes, but there is still _structure_
+      - but not strict
+
+#### MongoDB - Schema Design Example
+
+  - example contains `runtime: 151 min`
+  - combined a size and the units.
+    - size: 151
+    - unit: "min"
+  - making this distinction allows better manipulation within the db
 
 ### Normalization
+#### Topics
+
+  - Normalization and Mongo
+  - 3rd normal form
+  - Single collection
+  - Multiple collection
+
+#### Normalization - 3rd Normal Form (Problem)
+
+If you have multiple entries for a single person across your database, it is hard to update their name in all places.
+You can create inconsistent data.
+
+To avoid this, you utilize spitting data across multiple tables. The person has their own table, and the movie table references them.
+
+#### Do-normalized/Embedded approach
+
+Mongo has no foreign key, so instead we have the embedded objects. They can also contain links to another collection that contains info about the entity.
+
+How is this not foreign keys and linking?
 
 ### Relationships
+#### Topics
+  - Relationships
+    - One to One
+    - One to Many
+    - Many to Many
+
+#### One to One Relationships
+
+  - Employee -> Address
+
+#### One to Many Relationships
+
+  - Customer -> Address
+    - Same as embedded, but now in an array
+
+#### Many to Many Relationships
+
+  - Movie -> Actor
+    - Movie can have many actors
+    - Actors can be in many movies
+  - Two design approaches
+    - Embedding
+    - Linking
+
+  - Can put relation in _either one_ of hte documents
+  - Application centric approach - focus will be on _how the data is accessed_ from the app
+
+#### Linking vs Embedding
+
+  - Embedding - similar to pre-joins
+  - Embedded docs are _easy to handle_ for clients
+  - Linking - more flexible but _extra work_ at application level
 
 ## GridFS and Geospatial
 ### GridFS
