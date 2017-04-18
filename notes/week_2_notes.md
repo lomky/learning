@@ -311,10 +311,90 @@ How is this not foreign keys and linking?
 
 ## GridFS and Geospatial
 ### GridFS
+#### Topics
 
-### GridFS Demo 1
+ - GridFS Introduction
+ - GridFS Architecture
+ - GridFS Collections
+ - Metadata
 
-### GridFS Demo 2
+#### GrdiFS Introduction
+  - **GridFS** - specification for _storing_ and _retrieving_ large files
+    - iamges, audio files, video files, etc
+  - File system to store the _chunks_
+  - Data is stored within MongoDB _collectons_
+  - Files are broken in to multiple chunks and a metadata file
+    - stores each chunk of data in a _separate document_, each of max size _255KB_.
+
+#### GrdiFS vs Embedded Use Cases
+  - 10MB document of query-able data with normalized types as embedded - _embedded_
+  - 18MB document of query-able data is normalized types as embedded - _embedded + linked_
+    - remember the size limit of 16MB, but since it's all queriable, maybe link instead of GridFS
+  - 10MB document of image block plus query-able data - store as _regular_ document
+  - 18MB document of mostly an image blob and a small about of query-able data - _GridFS
+    - this is not only too big, but the image isn't queriable either.
+
+#### GridFS - Architecture
+
+  - GridFS -> Files
+           -> Chunk1
+           -> Chunk2
+           -> ChunkN
+
+#### GridFS - Collections 
+  - **GridFS** uses two collections
+    - fs.files - file's metadata
+    - fs.chunks - file chunks
+  - GridFS will _reassemble_ the contents when you access the chunks.
+    - transparent to client application
+
+#### GridFS - `chunks` fields
+
+```json
+{
+  "_id" : <ObjectId>,
+  "files_id" :<ObjectId>,
+  "n" : <num>,
+  "data" : <binary>
+}
+```
+
+  - _id : the unique Object ID of the chunk
+  - files_id : the _id of the "parent" document, as specified in the files collection
+  - n : The sequence numnber of hte chunk.
+    - GridFS numbers all chunks, 0 index
+  - data : the chunk's payload as a BSON binary type.
+
+#### GridFS - `files` metadata
+
+```json
+{
+  "_id" : <ObjectID>,
+  "length" : <num>,
+  "chunkSize" : <num>,
+  "uploadDate" : <timestamp>,
+  "md5" : <hash>,
+
+  "filename" : <string>,
+  "contentType" : <string>,
+  "aliases" : <string array>,
+  "metadata" : <dataObject>,
+}
+```
+
+  - _id : The unique Object ID of the document
+  - length : size of the document in bytes
+  - chunkSize : the size of each chunk, default 255KB
+  - uploadDate : Date the doc was first stored by GridFS
+  - md5 : MD5 hash
+  - filename : human-readable name for the doc
+  - contentType : valid MIME type for the doc
+  - aliases : array of alias strings
+  - metadata : any additional information you want to store
+
+### GridFS Demo 1 && GridFS Demo 2
+
+  - Walkthrough of the GridFS system in the IRB.
 
 ### GridFS Demo 3
 
