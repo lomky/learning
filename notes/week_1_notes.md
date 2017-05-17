@@ -182,7 +182,7 @@ var f = function(x,y){
 ```  
 Haskell:  
 ```haskell
-f - \x y -> x*x+y*y
+f = \x y -> x*x+y*y
 ```  
 
 **Let expressions**  
@@ -337,10 +337,13 @@ or
 ```
 
 **Regardless, _result_ doesn't depend on reduction path!**  
-the _Church-Rosser theorem** states: "Every terminating reduction path gives the same result".  
+the _Church-Rosser theorem_ states:  
+
+> Every terminating reduction path gives the same result
+
 Therefore:  
   - Correctness does not depend on order of eval
-  - compiler or programming can change the order freely to improve performance without affecting the result
+  - compiler or programmer can change the order freely to improve performance without affecting the result
   - different expressions can be evaluated in parallel, without affecting the result
     - _As a result, functional languages are leading contenders for programming future parallel systems_
 
@@ -429,13 +432,13 @@ The cross product of two sets A and B is {(a,b)|a←A,b←B}
 `[[a,b] | a <- [10,11,12] , b <- [20,21]]` -- > `[[10,20],[10,21],[11,20],[11,21],[12,20],[12,21]]`
 
 **List Operations**  
-Indexing a list uses the `!!` operator. Given a list and an indeix, it returns the element.  
+Indexing a list uses the `!!` operator. Given a list and an index, it returns the element.  
 `[5,3,8,7] !! 2` gives `8`  
 Zero indexed.  
 Negative or too large indexes produce the _undefined_ return  
 Robust programming ensures the all expressions are well defined or have the exceptions handled.  
 
-**_head_ and _tail_**
+**_head_ and _tail_**  
 `head` returns the first and `tail` the rest of a list.  
 These are generally best not used, instead using pattern matching.  
 
