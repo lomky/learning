@@ -66,7 +66,7 @@ Expressing larger computation by chaining together functions of smaller computat
 ```haskell
 (.) :: (b->c) -> (a->b) -> a -> c
 (f . g) x = f (g x)
-``
+```
 
 **`map` function**  
 `map` applies a function to each list element.  
@@ -123,7 +123,7 @@ foldl f z0 xs0 = lgo z0 xs0
              where
                 lgo z []     =  z
                 lgo z (x:xs) = lgo (f z x) xs
-``
+```
 
 **Right Fold: `foldr`**  
 Like `foldl`, but <-  
@@ -209,6 +209,77 @@ aka _list combinators_
 
 ### Custom Data Types
 #### 3.8 Define your own Data Types
+
+**Bool**  
+True :: Bool  
+False :: Bool  
+
+**Int**  
+1 :: Int  
+42 :: Int  
+minBound :: Int  
+
+**Others**  
+'a' :: Char  
+[1,2,3] :: Int List
+("victoria", 1837) :: (String, Int)
+
+**User-Defined Types**  
+Create a simple number that can only count 1, 2, Many.  
+```
+Prelude> data SimpleNum = One | Two | Many
+Prelude> One
+
+<interactive>:4:1: error:
+    • No instance for (Show SimpleNum) arising from a use of ‘print’
+          There are instances for similar types:
+          instance [safe] Show Ghci2.SimpleNum
+           -- Defined at <interactive>:2:44
+     • In a stmt of an interactive GHCi command: print it
+Prelude> data SimpleNum = One | Two | Many deriving Show
+Prelude> One
+One
+Prelude> :t One
+One :: SimpleNum
+```
+Defined and made show-able by deriving it off another type.  
+
+**Convert Int to SimpleNum**  
+```
+Prelude> :set +m
+Prelude> let convert 1 = One
+Prelude|     convert 2 = Two
+Prelude|     convert _ = Many
+Prelude|
+Prelude> convert 1
+One
+Prelude> convert 2
+Two
+Prelude> convert 33
+Many
+Prelude> map convert [1..5]
+[One,Two,Many,Many,Many]
+```
+
+That's a custom data type with alternative values, aka _Sum_ data type.
+
+**Algebraic Data Type**  
+Stores a portfolio of values.  
+```
+Prelude> data CricketScore = Score [Char] Int Int deriving Show
+Prelude> let x = Score "New Zealand" 350 4
+Prelude|
+Prelude> x
+Score "New Zealand" 350 4
+Prelude> :t x
+x :: CricketScore
+```
+
+**Summary**  
+_data_ keyword defines new types  
+`deriving Show` allows values to print out  
+sum data types use `|` to give alternative values  
+Type constructors are used to build _record types_ or _product data types_  
 
 #### 3.9 Grow a Tree
 
