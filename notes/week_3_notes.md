@@ -80,7 +80,7 @@ Common style: given two simple computations, compose them with map:
 map :: (a -> b) -> [a] -> [b]
 map _ []     = []
 map f (x:xs) = f x : map f xs
-``
+```
 
 **Folding a list (reduction)**  
 iterating over a list to produce a singleton: _fold_  
