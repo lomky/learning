@@ -283,14 +283,181 @@ Type constructors are used to build _record types_ or _product data types_
 
 #### 3.9 Grow a Tree
 
+**Trees**  
+In computer science, trees from from root to leaves.  
+Roots are the unique starting point, leaves are at the bottom.  
+
+**Binary Trees**  
+Generally used to store data in a sorted order, allowing for efficient searching.  
+
+**Tree Data Type in Haskell**  
+Tree data type to store integers.  
+```haskell
+data Tree = Leaf | Node Int Tree Tree deriving Show
+```  
+Tree values might be a `Leaf` or a `Node`. It is a _recursive_ data type!  
+`Node` stores an `Int` payload and branches to two subtrees, aka children.  
+
+Simplest tree:  
+```Haskell
+Leaf
+```  
+
+Tree with one Node, val 3, and two leaves.  
+```haskell
+Node 3 Leaf Leaf
+```  
+
+**Compute the depth of a `Tree`**  
+```haskell
+treeDepth :: Tree -> Int
+treeDepth Leaf = 0
+treeDepth (Node _ leftSubtree rightSubtree) =
+  1 + max (treeDepth leftSubtree) (treeDepth rightSubtree)
+```  
+Note the `_` value - we don't need to worry about the payload value for our purpose.  
+How about a function that sums the node values?  
+Write your own:  
+```haskell
+treeSum :: Tree -> Int
+treeSum :: Leaf = 0
+treeSum (Node num leftSubtree rightSubtree) = num + (treeSum leftSubtree) + (treeSum rightSubtree)
+```  
+
+**Sort the tree**  
+`Leaf`s are always sorted,  so each node is what we're sorting.  
+Check each value is between min and max, splitting the ranges as we go down.  
+```haskell
+isSortedTree :: Tree -> Int -> Int -> Bool
+isSortedTree :: Leaf _ _ = True
+isSortedTree ( Node x leftSubtree rightSubtree) minVal maxVal =
+  let leftSorted    = isSortedTree leftSubtree minVal x
+   rightSorted   = isSortedTree rightSubtree x maxVal
+  in x >= minVal && x < maxVal && leftSorted && rightSorted
+```
+
+**_Modication_ functions**  
+The above have been _traversal_ functions, moving through the tree data structure & computing at each node.  
+_modification_ functions generate new `Tree`s by modifying the values of the source `Tree`  
+This function will add a new max value to the tree.  
+```haskell
+addNewMax :: Tree -> Tree
+-- add a new max element to tree
+addNewMax Leaf = Node 0 Leaf Leaf -- input tree with no nodes
+addNewMax (Node x t1 Leaf) = Node x t1 (Node (x+1) Leaf Leaf) -- this is the rightmost Node
+addNewMax (Node x t1 t2) = Node (x t1 t2) = Node x t1 (addNewMax t2) -- intermediate node, go down right subtree
+```
+
+**Practice Problems**  
+_Insert a value in place into a tree_  
+```haskell
+insertValue :: Tree -> Int -> Tree
+insertValue Leaf x = Node x Leaf Leaf
+insertValue (Node value leftSubtree rightSubtree) x
+  | x < value = Node value (insertValue leftSubtree x) rightSubtree
+  | x >= value = Node value leftSubtree (insertValue rightSubtree x)
+```  
+
+_Convert a Tree into a list_  
+```haskell
+treeToList :: Tree -> [Int]
+treeToList Leaf = []
+treeToList (Node value leftSubtree rightSubtree) =
+  treeToList leftSubtree ++ ([value]) ++ trreToList rightSubtree
+```
+
 #### 3.10 Type Classes
+
+**Number like Types**  
+Int, Float, Integers  
+Many arithmetic functions can apply to any numeric type.  
+```
+2+2
+4
+2+pi
+5.141
+2*2
+4
+```  
+
+**Type Classes**  
+Establish a family the type belongs to, allowing them to use common functions.  
+```
+:type (+)
+(+) :: Num a => a -> a -> a
+```  
+The `Num a` is the _context of the type_ establishing type class membership.  
+
+**Other Type Classes**
+```
+:type (==)
+(==) :: Eq a => a -> a -> Bool
+1 == 1
+True
+
+:type (<)
+(<) :: Ord a => a -> a -> Bool
+"aaron" < "aardvark"
+False
+```  
+
+**Show & Read**  
+Show means the type can return itself as a string to print.  
+Read means you can generate values of such type from a string value.  
+```
+show 1
+"1"
+show True
+"True"
+read "1" :: Int
+1
+read "True" :: Bool
+True
+```  
+
+**Specifying Type Class on a Type**  
+_deriving_ in the type declaration.  
+```
+data SimpleNum - One | Two | Many deriving (Show, Read)
+
+show One
+"One"
+show Two
+"Two"
+show Many
+"Many"
+read "One"
+*** Exception Prelude.read no parse
+read "One" :: SimpleNum
+One
+
+One == One
+[error message, SimpleNum not eq type class]
+data SimpleNum - One | Two | Many deriving (Show, Read, Eq)
+One == One
+True
+One == Two
+False
+One == "One"
+[Type mismatch error]
+```  
+
+**Summary**  
+A type clas constrains memebertypes (instances) to conform to an API  
+Type classes are like interfaces in C# and Java  
+Types in the type class are like contrete implementations of interfaces  
+Type classes enable operator overloading.  
 
 ### Haskell History
 #### 3.11 Interview with Simon Peyton Jones
+Watched. Notes not taken.  
 
 #### 3.12 Brief History of Haskell
+Read. Notes not taken.  
 
 #### 3.13 Course Feedback
+Watched. Notes not taken.  
 
 #### 3.14 End of Week 3
+Watched. Notes not taken.  
 
