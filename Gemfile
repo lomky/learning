@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.11'
 gem 'faker', '1.7.3'
-gem 'will_paginate',           '3.1.5'
+gem 'will_paginate'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'carrierwave',             '1.1.0'
 gem 'mini_magick',             '4.7.0'
