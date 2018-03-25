@@ -143,7 +143,123 @@ Data Access layer - MongoDB of JSON Documents
 
 ### Introduction to Node.js and NPM
 
+#### Objectives
+
+ - download & install Node & NPM
+
+#### Node.js & NPM
+
+JS was originally designed as a scripting language for browsers.
+Nodejs has shifted this.
+
+Node.js is a JS runtime built on Chrone V8 JS Engine  
+Event-driven, non-blocking I/O model, making it lightwieght & efficient
+
+**Node Architecture**   
+Node Code / Standard Lib (JS)  
+Node Bindings (C++)  
+Chrome V8 (C++) + libuv (C)  
+
+**Node.js use cases**  
+Utilities: Bower, Frunt, Gulp, Yeoman  
+Server-side Dev: Web server, business logic, DB access
+
+**Node Package Manager (NPM)**  
+NPM: manages ecosystem of node modules/pkgs  
+Packages contain: 
+  - JS files
+  - package.json (manifest)
+
+#### Setting up Node.js & NPM
+
+Installed [Node Version Manager](https://github.com/creationix/nvm).  
+Installed Node v8.4.0 to match coursera, set Coursera alias  
+Confirmed versions match course.
+
+#### Additional Links
+
+[Nodejs.org](https://nodejs.org/en/)  
+[Npmjs.com](https://www.npmjs.com/)  
+[Node API Documentation](https://nodejs.org/api/)  
+[NPM Documentation](https://docs.npmjs.com/)  
+
 ### Node Modules
+
+#### Objectives and Outcomes
+
+  - Write basic node apps & run them
+  - Dev node modules & use them in the app
+  - learn callbacks & error handling
+
+#### Node Modules
+
+**JavaScript Modules**
+
+  - JS has no stdlib at the language level
+  - CommonJS API fills the stdlib gap with defined APIs for common app needs
+    - defines a module format
+    - Node follows CommonJS module specs
+
+**Node Modules**
+
+    - every file is a module
+    - the *module* var gives acces to teh current module definition in a file
+    - the *module.exports* var determines the export from the current module
+    - the *require* function is used to import a module
+
+**Types**
+
+  - File-based Modules
+  - Core Modules
+    - part of core Node
+    - kept intentionally small
+    - Ex: path, fs, os, util
+  - External Node Modules
+    - third party modules
+    - installed via NPM
+    - `node_modules` folder in the Node app
+
+**Using Node Modules**
+
+  - include using the require function
+  - File-based modules:
+    - `require('./module_name')`
+    - specify the *relative* path
+  - Core & External modules:
+    - `require('module_name')`
+    - core is found by automatically
+    - looks for external modules in:
+      - ./node_modules, ../node_modules, ../../node_modules, ...
+      - up the dirtree until module is found
+
+**Example**
+
+`rectangle.js`
+```
+exports.perimeter = (x,y) => (2*(x+y));
+exports.area = (x,y) => (x*y);
+```
+
+**NB**: `exports` is an alias for `module.exports`
+
+`index.js`
+```
+var rect = require('./rectangle');
+
+...
+```
+
+#### Exercise: Understanding Node Modules
+
+[See exercise](../exercises/week_1/understanding-node-modules)
+
+Node supports both JS and TypeScript
+
+#### Node Modules: Callbacks and Error Handling
+
+#### Exercise: Node Modules: Callbacks and Error Handling
+
+#### Node Modules: Additional Resoures
 
 ### Node and HTTP
 
