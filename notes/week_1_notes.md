@@ -202,10 +202,10 @@ Confirmed versions match course.
 
 **Node Modules**
 
-    - every file is a module
-    - the *module* var gives acces to teh current module definition in a file
-    - the *module.exports* var determines the export from the current module
-    - the *require* function is used to import a module
+  - every file is a module
+  - the *module* var gives acces to teh current module definition in a file
+  - the *module.exports* var determines the export from the current module
+  - the *require* function is used to import a module
 
 **Types**
 
@@ -251,11 +251,72 @@ var rect = require('./rectangle');
 
 #### Exercise: Understanding Node Modules
 
-[See exercise](../exercises/week_1/understanding-node-modules)
+[See exercise](https://github.com/lomky/coursera-NodeJS/tree/master/exercises/week_1/understanding-node-modules)
 
 Node supports both JS and TypeScript
 
 #### Node Modules: Callbacks and Error Handling
+
+**JS: Two Salient Features**
+
+  - *First-class functions*: A function can be treated the same as any other var
+  - *Closures*:
+    - a function _defined_ inside another function has access to the outside functions scope.
+    - the inner function will continue to have access to the variables from the outer scope _even after the outer function has returned._
+
+**Async Programming**
+
+Assume Comp2 relies on the IO result, but Comp 3 isn't.  
+Async allows us to have comp 3 happen sooner  
+The function after the IO is called a _Callback_
+
+```
+Sync:
+Comp 1 -> Longrunning comp / IO -> Comp 2 -> Comp 3
+
+Async:
+Comp 1 -> Longrunning comp / IO  -> Callback
+       -> Comp 3
+```
+
+**Node, Async I/O, and Callbacks**
+
+The Event loop runs the entire process.  
+When an I/O request is made, it's sent back to the request stack
+
+```
+                             I/O req
+     Requests                 ___----> File /
+--> ||||||||||    EVENT LOOP /       Database /
+ ^                 (single          Processing
+  \__Callback_____ thread)  <---_______/
+                             I/O req completed
+```
+
+**Event Loop**
+
+```
+  ___
+ |   |
+ |   v
+ |  timers
+ |  I/O callbacks
+ |  idle, prepage
+ |  poll   <-------- incoming connections, data, etc
+ |  check
+ |  close callbacks
+ |  |
+ ----
+```
+
+*timers*: executes callbacks scheduled by `setTimeout()` and `setInterval()`  
+*I/O callbacks*: executes almost all callbacks with the exception of close callbacks (timers and check)  
+*idle, prepare*: only used internally  
+*poll*: retrieve new I/O events; node will block here as appropriate  
+*check*: `setImmediate()` callbacks are invoked here  
+*close callbacks*: eg `socket.on('close',...)`  
+
+Each phrase has its own queue.
 
 #### Exercise: Node Modules: Callbacks and Error Handling
 
