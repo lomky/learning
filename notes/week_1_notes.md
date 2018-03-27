@@ -393,9 +393,11 @@ XML vs JSON. JSON overview.
     - `fs.exists(filePath, function(exists){...});`
     - `fs.createReadStream(filePath).pipe(res);`
 
-#### Exercise (Video): Node and the HTTP Module
+#### Exercise: Node and the HTTP Module
 
-#### Exercise (Instructions): Node and the HTTP Module
+[See exercise](https://github.com/lomky/coursera-NodeJS/tree/master/exercises/week_1/node-http)
+
+Intro'd to Postman - investigate more.
 
 #### Node and HTTP: Additional Resources
 
