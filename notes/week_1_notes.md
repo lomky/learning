@@ -337,6 +337,68 @@ the pattern of calling a module with a passed in callback, and then handling the
 
 ### Node and HTTP
 
+#### Objectives and Outcomes
+
+  - create simple HTTP server with Node HTTP code module
+  - create a web servier with static HTML served from dir
+
+#### Networking Essentials
+
+Broad overview of how computer networks work.  
+_skimming PDF_  
+
+
+**Client and Server**
+
+Web applications are not stand alone  
+Many of them have a “Cloud” backend
+
+**Client - Server Communication**
+
+  - Network operations cause unexpected delays
+  - You need to write applications recognizing the asynchronous nature of communication
+    - Data is not instantaneously available
+
+_Overview of HTTP verbs, req, response, codes, etc_
+
+XML vs JSON. JSON overview.
+
+#### Node and the HTTP Module
+
+**Node HTTP Module**  
+
+  - core networking module supporting high-perf HTTP stack
+  - Use the module: `const http = require('http');`
+  - Create a server: `const server = http.createServer(function(req,res){...});`
+  - Start the server: `server.listen(port,...);`
+  - Incoming request message info available through `req`
+    - `req.headers`, `req.body`,...
+  - Response message is constructed on `res`
+    - `res.setHeader("Content-Type", "text/html");`
+    - `res.statusCode = 200;`
+    - `res.write('Hello World!');`
+    - `res.end('<html><body><h1>Hello World</h1></body></html>');`
+
+**Node `path` Module**
+
+  - Using path Module: `const path = require('path');`
+  - path examples:
+    - `path.resolve('./public' + fileURL);`
+    - `path.extname(filePath);`
+
+**Node `fs` Module**
+
+  - Using fs Module `const fs = require('fs');`
+  - fs examples:
+    - `fs.exists(filePath, function(exists){...});`
+    - `fs.createReadStream(filePath).pipe(res);`
+
+#### Exercise (Video): Node and the HTTP Module
+
+#### Exercise (Instructions): Node and the HTTP Module
+
+#### Node and HTTP: Additional Resources
+
 ### Introduction to Express
 
 ### Assignment 1
