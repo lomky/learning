@@ -1,7 +1,7 @@
 {
-  "name": "understanding-node-modules",
+  "name": "callback-error-handling",
   "version": "1.0.0",
-  "description": "\"Simple Node Examples\"",
+  "description": "\"Showing off callbacks and errors\"",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

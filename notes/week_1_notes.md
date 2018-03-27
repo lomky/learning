@@ -320,6 +320,12 @@ Each phrase has its own queue.
 
 #### Exercise: Node Modules: Callbacks and Error Handling
 
+[See exercise](https://github.com/lomky/coursera-NodeJS/tree/master/exercises/week_1/callback-error-handling)
+
+setTimeout takes (error, return value)  
+
+the pattern of calling a module with a passed in callback, and then handling the callback is very common in node.
+
 #### Node Modules: Additional Resoures
 
 ### Node and HTTP
