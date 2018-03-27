@@ -328,6 +328,13 @@ the pattern of calling a module with a passed in callback, and then handling the
 
 #### Node Modules: Additional Resoures
 
+[Node Modules](https://nodejs.org/api/modules.html)  
+[The Node.js Event Loop, Timers, and process.nextTick()](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)  
+
+[CommonJS](http://www.commonjs.org/)  
+[CommonJS Module Format](http://wiki.commonjs.org/wiki/Modules/1.1.1)  
+[RequireJS](http://requirejs.org/)  
+
 ### Node and HTTP
 
 ### Introduction to Express
