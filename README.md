@@ -11,7 +11,7 @@ Repository to hold my work for Coursera's [Server-side Development with NodeJS, 
 
 ## Assignments
 
-  - Module 1 Assignment - Status: **In progress**
+  - Module 1 Assignment - Status: **Completed**
     - [Instructions](https://github.com/lomky/coursera-NodeJS/blob/master/notes/week_1_notes.md#assignment-1)
     - [Code](https://github.com/lomky/coursera-NodeJS/tree/master/assignments/module1-solution)
   - Module 2 Assignment - Status: **Not Yet Begun**
