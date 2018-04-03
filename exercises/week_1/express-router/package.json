@@ -1,0 +1,16 @@
+{
+  "name": "express-router",
+  "version": "1.0.0",
+  "description": "Node Express Router",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "Kat T",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "morgan": "^1.9.0"
+  }
+}

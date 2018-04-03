@@ -475,7 +475,51 @@ _package-lock.json_
 
 #### Express Router
 
+**Express Application Routes**  
+
+  - given REST, we identify endpoints with an URI and apply verb to that URI
+  - app routes:
+  ```
+  app.all('/dishes', function(req,res,next) {...});
+  app.get('/dishes', function(req,res,next) {...});
+  app.post('/dishes', function(req,res,next) {...});
+  app.put('/dishes', function(req,res,next) {...});
+  app.delete('/dishes', function(req,res,next) {...});
+  ```
+  - Example:
+  ```
+  app.get('/dishes/:dishId',(req,res,next) => {
+      res.end('Will send detauils of the dish: '
+          + req.params.dishId + 'to you!');
+  });
+  ```
+
+**Body Parser**  
+
+  - Middleware to parse the body of the message
+  - Use:
+  ```
+  var bodyParser = require('body-parser');
+  app.use(bodyParser.json()); // parse the JSON in the vbody
+  ```
+  - Parses the body of the message and populates the req.body property
+
+**Express Router**  
+
+  - Express Router creates a mini-Express app:
+  ```
+  var dishRouter = express.Router();
+  dishRouter.use(bodyParser.json());
+  
+  dishRouter.route('/')
+    .all(...);
+    .get(...);
+    ...
+  ```
+
 #### Exercise Express Router
+
+[See exercise](https://github.com/lomky/coursera-NodeJS/tree/master/exercises/week_1/express-router)
 
 #### Introduction to Express: Additional Resources
 
