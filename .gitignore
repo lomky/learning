@@ -100,3 +100,6 @@ target/
 /yarn-error.log
 
 .byebug_history
+
+# Ignore uploaded test images.
+/public/uploads
