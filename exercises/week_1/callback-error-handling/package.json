@@ -1,0 +1,12 @@
+{
+  "name": "callback-error-handling",
+  "version": "1.0.0",
+  "description": "\"Showing off callbacks and errors\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "Kat T",
+  "license": "ISC"
+}
