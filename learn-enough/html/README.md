@@ -12,4 +12,12 @@ Modern HTML prefers _semantic meaning_ in its tags, rather than explicit formatt
 `<strong>` is better than `<b>`  
 More TK on this in the CSS/Layout course.  
 
+Continued walk through of basic tags. Valid HTMl...  
 
+Adding images, don't hotlink in most cases.  
+
+Neat tag: `<code>` does monospace.  
+
+Semantic separation areas of `header`, `div`, and `span`(inline).  
+
+Doing inline styling for the moment.
