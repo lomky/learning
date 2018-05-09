@@ -18,3 +18,16 @@ cabal.sandbox.config
 .stack-work/
 cabal.project.local
 .HTF/
+
+.eunit
+deps
+*.o
+*.beam
+*.plt
+erl_crash.dump
+ebin
+rel/example_project
+.concrete/DEV_MODE
+.rebar
+
+.DS_Store
