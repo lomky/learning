@@ -1,0 +1,13 @@
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module1
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module1-zips
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module2
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module2-zips
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module2-gridfs
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module2-gridfsfiles
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module2-geozips
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module3
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module3-movies
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module4
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module4-wsmovies
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module4-caching_movies
+git clone https://github.com/jhu-ep-coursera/fullstack-course3-module4-oauth_movies
