@@ -213,6 +213,107 @@ more than three selectors.
 
 **Group your styles & Add Comments!**
 
+## CSS Values: Color & Size
+
+### CSS Color
+
+Names: `red`, `green`, `lightgray`.  
+CSS supports lots of these. [Ref list](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)
+
+Hex: `#1379bd`  
+`red` is `#ff0000`.  
+short form of above: `#f00`  
+A few more to remember:
+  - `#000` is black
+  - `#fff` is white
+  - `#00f` is blue
+  - `#0f0` is green
+
+rgb: `rgb(255, 255, 255)` is `#fff`.  
+Also gives access to _transparency_ via `rgba`.  
+the _a_ is for _alpha_ (as in alpha level).  
+`0` is transparent, `1` is opaque. 
+Decimals indicate percent. `0.5` is 50% transparent.
+
+There are _even more ways_ to set color in CSS.  
+HSL, HSLa.  
+Not covering here.
+
+### Intro to Sizing
+
+_so many ways_ to set size.  
+Browser implementation is super kludged.
+
+Pixels: `px`.  
+great, if everyone had the same size resolution.  
+varying pixel density throws this out.  
+
+Absolute sizes are a way of the past.
+
+_relative_ sizes: size based on other elements.  
+allows you to scale various screens, 
+and deal with resizing easily.
+
+### Pixels & Points
+
+Pixel: `px`  
+Point: `pt`
+
+Absolutely measurements defined as `1/96` of an
+inch for `px` and `1/72` of an inch for `pt`.
+
+Now ignore `pt`. Like everyone else.  
+Some people _hate_ `px`.  
+LE stance: use `px` if it makes sense, makes the
+work easier, and doesn't break the layout. Otherwise,
+use relative.  
+
+Don't use pixel sizes for fonts!
+
+_DO_ use pixels for border width.
+
+### Percentages
+
+Can be useful for relative sizing.  
+Caveats!!: 
+  - percentage sizing is based on _parent container_, not browser or page size
+  - percentage heights are weird as they require the parent container to have a _set_ height.
+
+You cannot use percentage for borders.
+
+Percentage height requires the parent 
+to have a defined absolute height. Without it
+the browser makes it just big enough to hold the
+content. Don't use it.
+
+We'll find a better solution to height sizing
+later on.
+
+**Percentage fonts**  
+Works! But remember: it based the size on whatever
+the `font-size` the container has inherited. Not
+on the container size. A box `1000px` tall with
+parent font size `16px` and child font size `50%`
+will have `8px` font!  
+
+This weird sourcing is why percentage font size is
+rarely used. Most people think in sizes of the 
+containers of the box shaped things.
+
+### `em`
+
+`em` is a relative size unit commonly used to 
+size text. (Preferred, even).  
+Named because of the width of an 'm'.  
+In CSS, one `em` is the number of pixels equal to
+the current font size of the given elements parent
+container. Fallback is default page font size.  
+Plaintext default is `16px`.  
+so, `0.5em` would be `8px`.  
+and, `2.25em` would be `36px`.  
+
+
+
 
 
 
