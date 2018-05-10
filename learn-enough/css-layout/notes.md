@@ -54,7 +54,7 @@ Working in [the sample site](./sample_webpage/index.html).
 Building inline stylesheets via `style` tags.  
 These can go anywhere, but `head` is conventional.
 
-```css
+```
 ...
 a {
   color: red;
@@ -73,6 +73,7 @@ li {
 }
 ...
 ```
+ 
 
 ### CSS Selectors
 
@@ -86,6 +87,144 @@ Suggested best practices:
   - `-`, `_`, & `CamelCase` to multiword
   - spaces are invalid
   - consistency!
+
+## Style of Style
+
+CSS Considerations:
+  - from the browser: no real distinction between inline and well formatted.
+  - from the text editor: huge difference in maintainability
+
+Making good choices wrt naming & structure to 
+improve maintainability moving forward
+
+### Naming Things
+
+  - Name by intent
+    + `box2` - bad, too generic
+    + `bio-box` - good, refers to intent (box for biographies)
+  - Avoid naming by appearance. Use _functional_ naming.
+    + class `red` to highlight, - no! what if you want purple later?
+    + class `alert` instead
+    + use `collapse` over `small`
+    + use `disabled` rather than `grey`
+  -  See some strict naming conventions:
+    +  [BEM](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
+    +  [OOCSS](https://www.smashingmagazine.com/2011/12/an-introduction-to-object-oriented-css-oocss/)
+    +  [SMACSS](https://smacss.com/)
+
+### When & Why: Classes vs IDs
+
+
+**ID**: Unique. One allowed per object.  
+**Class**: multi. Many allowed per object.  
+
+Browsers _treat them differently_!
+
+**ID**s have higher _specificity_, and thus override 
+classes. This makes the handling hard to override with
+classes, and the styling ends up full of hacks.
+
+LE suggestion:
+
+> You should strive to use ids only when you absolutely have 
+> to (for example, if you are using JavaScript, and then 
+> use them only for JavaScript).
+
+Classes: Machine guns spraying style.  
+IDs: _Rocket Launcher_
+
+### Priority & Specificity
+
+CSS designed to allow multiple sheets with overriding 
+properties.
+
+Final declarations win:
+
+```
+  .bio-box {
+    width: 75%;
+  }
+  .bio-box {
+    width: 50%;
+  }
+```
+
+Results in `width` being `50%`.
+
+Full priority list:
+
+  1. Importance (`!important`) (NEVER use this)
+  2. Inline
+  3. Media Type
+  4. User defined (local, accessibility)
+  5. Selector specificity (`class` and `id` overwrite generic)
+  6. Rule order (last wins)
+  7. Parent inherit 
+  8. CSS (`style` blocks for generic elements)
+  9. Browser default
+
+
+What happens with priority ties? **Specificity**
+
+The more specifically you target an element, the
+greater the strength.
+
+```
+# Not very specific
+a {
+  color: gray;
+}
+
+# More specific
+h1 a {
+  color: green;
+}
+
+```
+
+Less to More Specific, _ish_:
+
+ - Simple HTML selector  `em {color: #fff;}`  
+ - HTML selector targeting element inside another element  `h1 em {color:  - #00ff00;}`  
+ - CSS class name  `.alert {color: #ff0000;}`  
+ - HTML element with a class name  `p.safe {color: #0000ff;}`  
+ - CSS id  `#thing {color: #823706;}`  
+ - CSS id with a class name  `#thing .property {color: #823706;}`  
+ - Inline style  `style="color: transparent;"`   
+
+### Good Styling Citizen
+
+Build your classes like they're legos, easy to snap
+together. Modular styles!
+
+Multiple classes on a selectior is fine! But don't
+overdo it.
+
+Two categories of styling:  
+
+  - global styles
+    + affect many different places
+    + create consistency
+  - individual sections
+    + self contained modules of functionality or content
+
+Three selector Limit - don't create style rules with 
+more than three selectors.
+
+**Group your styles & Add Comments!**
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
