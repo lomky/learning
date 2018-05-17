@@ -302,9 +302,9 @@ containers of the box shaped things.
 
 ### `em`
 
-`em` is a relative size unit commonly used to 
-size text. (Preferred, even).  
-Named because of the width of an 'm'.  
+`em` is a relative size unit commonly used to
+size text. (Preferred, even).
+Named because of the width of an 'm'.
 In CSS, one `em` is the number of pixels equal to
 the current font size of the given elements parent
 container. Fallback is default page font size.  
@@ -313,9 +313,64 @@ so, `0.5em` would be `8px`.
 and, `2.25em` would be `36px`.  
 
 
+If you use `em` throughout your site, changing the
+base font size will adjust the whole site accordingly.
+
+`em` changes are _cumulative_. 0.5 inside another 0.5
+will result in a 0.25 sized font. Use properly.
+
+You can size things like margins with `em`s. Maybe you want
+to base your sizing on the fontsize. Maybe you don't. Be aware
+of flame wars and such, do what is right for the project and
+be consistent.  
+
+### `rem`
+
+Like `em`, but instead of parsing its parent tree, `rem` goes
+back to the font size defined on the `html` tag - the font size
+for the page.
+
+Best practice is to use a `rem` unit for the font-size at the
+top of your 'module', and then style all inside with `em`. Now
+you can move that module without worrying about cumulative explosions.
+
+### `vh` & `vw`
+
+Newer mobile-friendly units.  
+Two-dimensional.  
+
+`vh` - viewport height  
+`vw` - viewport width  
+
+Sizes based on the actual size of the browser window / mobile screen.  
+1 vh/vw is 1% of the screen dimension.  
+`3vh` is 3% of the height.  
+`100vw` is 100% of the width.  
+
+Not affected by parent element sizing. No cumulative effects.
+Everything is based on the window size.  
+
+These are newer, so some older browsers lack support. Be aware.
+
+Space _will be left_ for the browsers default margin. These defaults
+can be adjusted with a _reset_.
+
+Also works on fonts!
+
+All of this is nice - expect mobile screens and desktop screens are
+so distinct as to render a good style in one awful in the other.  
+*cough* media queries! *cough*
 
 
+### Pleasing fonts
 
+The goal is readable text.
+
+  - Use relative units for text
+  - don't use the 62.5% trickt
+  - pick random numbers that set the font close to your design needs.
+
+Don't seek pixel perfect. Seek good design and maintainable styles.
 
 
 
