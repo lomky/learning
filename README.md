@@ -1,37 +1,30 @@
-## Welcome to GitHub Pages
+### Ongoing
 
-You can use the [editor on GitHub](https://github.com/lomky/learning/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+  - [Duolingo](https://www.duolingo.com/Lomkey) - Spanish
+  - [Khan Academy](https://www.khanacademy.org/profile/Lomky/) - Many topics
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Completed Courses
 
-### Markdown
+ - [Coursera](https://www.coursera.org) [Ruby on Rails: An Introduction](https://www.coursera.org/learn/ruby-on-rails-intro) - _Summer 2016_  
+ - [Coursera](https://www.coursera.org) [Rails with Active Record and Action Pack](https://www.coursera.org/learn/rails-with-active-record) - _Fall 2016_  
+ - [Coursera](https://www.coursera.org) [HTML, CSS, and Javascript for Web Developers](https://www.coursera.org/learn/html-css-javascript-for-web-developers/) - _Winter 2017_ - [my coursework](https://lomky.github.io/learning/coursera/webdev/), [my code](https://github.com/lomky/learning/tree/master/coursera/webdev)
+ 
+ - [FutureLearn](https://www.futurelearn.com) [Introduction to Linked Data and the Semantic Web](https://www.futurelearn.com/courses/linked-data/) - _Fall 2016_
+ 
+ - [FutureLearn](https://www.futurelearn.com) [Monitoring Climate from Space](https://www.futurelearn.com/courses/climate-from-space/) - _Spring 2016_
+ - [FutureLearn](https://www.futurelearn.com) - [Earth Observation from Space: the Optical View](https://www.futurelearn.com/courses/optical-earth-observation/) - _Summer 2016_
+ - [FutureLearn](https://www.futurelearn.com) - [Monitoring the Oceans from Space](https://www.futurelearn.com/courses/oceans-from-space/) - _Fall 2016_
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Inactive Courses
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/lomky/learning/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+ - [LearnEnough](https://www.learnenough.com) [The Rails Tutorial](http://www.railstutorial.org/book) 
+   - [My Coursework](https://lomky.github.io/learning/learn-enough/rails)
+ - [Coursera](https://www.coursera.org) [Ruby on Rails Web Services and Integration with MongoDB](https://www.coursera.org/learn/ruby-on-rails-web-services-mongodb) 
+   - My Coursework [site](https://lomky.github.io/learning/coursera/ruby-on-rails-mongodb/) and [code](https://github.com/lomky/learning/tree/master/coursera/ruby-on-rails-mongodb)
+   - Started Winter 2017, stopped as of Spring 2017. Displeased with course; no plans to revive.
+ - [FutureLearn](https://www.futurelearn.com) [Functional Programming in Erlang](https://www.futurelearn.com/courses/functional-programming-erlang)
+   - My Coursework [site](https://lomky.github.io/learning/future_learn/erlang/) and [code](https://github.com/lomky/learning/tree/master/future_learn/erlang)
+   - Started Winter 2017, paused as of Spring 2017. May resume later.
+ - [FutureLearn](https://www.futurelearn.com) [Functional Programming in Haskell](https://www.futurelearn.com/courses/functional-programming-haskell)
+   - My Coursework [site](https://lomky.github.io/learning/future_learn/haskell/) and [code](https://github.com/lomky/learning/tree/master/future_learn/haskell)
+   - Started Winter 2017, paused as of Summer 2017. May resume later.
