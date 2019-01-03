@@ -372,9 +372,126 @@ The goal is readable text.
 
 Don't seek pixel perfect. Seek good design and maintainable styles.
 
+## The box model
 
+A way of viewing a webpage.
 
+All boxes have height, width, borders, margins (outside spacing), padding
+(inside spacing).  
+The **CSS _box model_** - name for all the rules to determine how those are 
+applied to the elements.  
+Can be confusing with strange interactions! Counterintuitive stying! Odd
+formatting! It'll make sense in the end.
 
+### Inline vs. Block
+
+These two types of elements style differently in the box model.
+
+inline elements like `span` and `a` can only have left & right margins
+and padding. No top or bottom. They also do not accept width or height
+as set by CSS.  
+block does not have these restrictions.  
+
+Some styles can swith an inline element to be a block element.  
+floating an inline element makes it a block, not allowed to have top &
+bottom margins and padding. Previously ignored elements like height & width
+are now applied.  
+Adjusting an elements position on the page can also swap it from inline to
+block.  
+Can also force this change from inline to block with CSS.  
+
+**display:none**  
+prevents the element from displaying on the page.  
+often used for hiding interactive elements, like with javascript.  
+
+**display:block**  
+force an elements to be a block element regardless of what it was before.
+If you don't set the dimensions, it will pull them from its parents.
+
+**display:inline** 
+turns a block elements into an inline element. Strips the non-inline styles
+(height, width, top margins, padding).  
+Element will flow with the text.  
+
+**display:inline-block**  
+allows for styling like a block, but otherwise acts as inline.  
+Text will flow around it and it will only take up the horizontal space
+needed.  
+Can have a width, height, top margins, and padding.  
+
+**display:flex**  
+forces all child elements to fill the entire parent element.  
+highly customizable for layout purposes.  
+see chapter 7.
+
+### Margins, padding, and borders
+
+Common use for hte box model is to setup margins, padding, and borders.  
+
+**Borders & Padding**  
+*NB!!!* when you set the size of an element (ie width), you are setting the
+size of the content before padding and borders are applied! this is the
+default behavior.
+
+```css
+width: 200px;
+padding: 40px;
+border 10px solid #c00;
+```
+
+This is a total of 300px wide on the page.  
+10+40+200+40+10.  
+
+To change this behavior, we can use the `box-sizing` declaration.  
+
+```css
+      box-sizing: border-box;
+```
+
+**Margin weirdness**  
+
+Block elements collapse top+bottom margins when they're adjacent to each
+other.
+
+### Floats
+
+`float` allows an element to gloat left or right. All inline content shuld
+flow around it. Floated elements sit next to other floated elements on the
+same line, if there is horizontal room. Too wide, drop down a line.
+
+dealing with formatting post-float can get annoying. We can set the next
+element to clear the style, but that's not very good modularity.
+
+instead, we can use either the `overflow` method or the `:after` clearfix method.
+
+**overflow method**  
+
+set `overflow:hidden` on the class and it will shift the text down as if
+the next element cleared the float.  
+
+Problem: this does not interact well if you have to set a height on the
+element. Anything that would make the element longer than that height will
+now get cutoff.
+
+**:after clearfix**  
+
+```css
+/* BIO STYLES */
+.bio-wrapper {
+  font-size: 24px;
+}
+.bio-wrapper:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+```
+
+Creates an imaginary element immediately after the `.bio-wrapper` element
+that we can style.
 
 
 
