@@ -2,8 +2,7 @@
 
   - [Duolingo](https://www.duolingo.com/Lomkey) - Spanish
   - [Khan Academy](https://www.khanacademy.org/profile/Lomky/) - Many topics
-  - [LearnEnough](https://www.learnenough.com) [Javascript Tutorial](https://www.learnenough.com/javascript-tutorial-tutorial/hello_world/js_web) 
-    - [My Coursework](https://lomky.github.io/learning/learn-enough/javascript)
+  - [Work Bookclub](https://lomky.github.io/learning/books/caseflow-bookclub)
 
 ### Completed Courses
 
@@ -19,6 +18,9 @@
 
 ### Inactive Courses
 
+  - [LearnEnough](https://www.learnenough.com) [Javascript Tutorial](https://www.learnenough.com/javascript-tutorial-tutorial/hello_world/js_web) 
+    - [My Coursework](https://lomky.github.io/learning/learn-enough/javascript)
+    - Now behind a paywall
  - [LearnEnough](https://www.learnenough.com) [The Rails Tutorial](http://www.railstutorial.org/book) 
    - [My Coursework](https://lomky.github.io/learning/learn-enough/rails)
  - [Coursera](https://www.coursera.org) [Ruby on Rails Web Services and Integration with MongoDB](https://www.coursera.org/learn/ruby-on-rails-web-services-mongodb) 
