@@ -13,3 +13,12 @@ WTF is a unit test anyhow?
 Article to read: https://martinfowler.com/bliki/UnitTest.html
 
 Test through the _public interface_
+
+### Mocking, Stubs, Etc
+
+RSpec term `doubles`.
+https://martinfowler.com/bliki/TestDouble.html
+
+https://destroyallsoftware.com/talks/boundaries
+
+
