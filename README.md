@@ -1,12 +1,7 @@
 
 ### Ongoing
 
-  - [Duolingo](https://www.duolingo.com/Lomkey) - Spanish
-  - [Khan Academy](https://www.khanacademy.org/profile/Lomky/) - Many topics
-  - [Work Bookclub](https://lomky.github.io/learning/books/caseflow-bookclub) 
-  - [Upcase](https://lomky.github.io/learning/upcase/README.md)
-  - Mistake
-  - Mistake 2
+ - None Currently
 
 ### Completed Courses
 
@@ -22,6 +17,10 @@
 
 ### Inactive Courses
 
+  - [Duolingo](https://www.duolingo.com/Lomkey) - Spanish
+  - [Khan Academy](https://www.khanacademy.org/profile/Lomky/) - Many topics
+  - [Work Bookclub](https://lomky.github.io/learning/books/caseflow-bookclub) 
+  - [Upcase](https://lomky.github.io/learning/upcase/README.md)
   - [LearnEnough](https://www.learnenough.com) [Javascript Tutorial](https://www.learnenough.com/javascript-tutorial-tutorial/hello_world/js_web) 
     - [My Coursework](https://lomky.github.io/learning/learn-enough/javascript)
     - Now behind a paywall
